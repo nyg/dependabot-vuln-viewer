@@ -4,19 +4,18 @@ export default function Home() {
 
     event.preventDefault()
 
-    console.log(document.forms.vuln.repositories.value)
-    console.log(document.forms.vuln.githubApiUrl.value)
-    console.log(document.forms.vuln.githubApiToken.value)
-
-    fetch('/api/hello').then(response => response.json()).then(json => console.log(json))
+    const body = new URLSearchParams(new FormData(event.target))
+    fetch('/api/vulnerabilities', { method: 'POST', body })
+      .then(response => response.json())
+      .then(json => console.log(json))
   }
 
   return (
     <>
-      <form name='vuln' method='post' onSubmit={retrieveVulnerabilities}>
+      <form method='post' onSubmit={retrieveVulnerabilities}>
         <p>
           <label htmlFor='github-api-url'>Github API URL</label>
-          <input type='text' id='github-api-url' name='githubApiUrl' placeholder='https://api.github.com/graphql' />
+          <input type='text' id='github-api-url' name='githubApiUrl' defaultValue='https://api.github.com/graphql' />
         </p>
         <p>
           <label htmlFor='github-api-token'>Github API Token</label>
