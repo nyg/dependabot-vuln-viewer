@@ -1,11 +1,25 @@
 {
-  "name": "dependabot-vulnerability-viewer",
-  "version": "0.1.0",
-  "private": true,
+  "name": "dependabot-vuln-viewer",
+  "version": "1.0.0",
+  "description": "Quick overview of Dependabot vulnerabilites of multiple repositories",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nyg/dependabot-vuln-viewer.git"
+  },
+  "keywords": [
+    "dependabot",
+    "vulnerabilities",
+    "github",
+    "graphql",
+    "log4shell"
+  ],
+  "author": "nyg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nyg/dependabot-vuln-viewer/issues"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next dev"
   },
   "dependencies": {
     "got": "12.0.0",
