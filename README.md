@@ -1,1 +1,1 @@
-# Dependabot Vulnerabilit Viewer
+# Dependabot Vulnerability Viewer
