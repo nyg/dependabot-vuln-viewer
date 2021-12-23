@@ -23,7 +23,7 @@ export default function Home() {
             <label htmlFor='github-api-token'>Github API Token</label>
             <input type='password' id='github-api-token' name='githubApiToken' autoComplete='current-password' />
             <label htmlFor='repositories'>Repositories</label>
-            <input type='text' id='repositories' name='repositories' />
+            <input type='text' id='repositories' name='repositories' defaultValue='repo:nyg/dependabot-vuln-viewer user:vercel'/>
           </div>
           <div>
             <button>Retrieve Vulnerabilites</button>
