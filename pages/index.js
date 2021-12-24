@@ -1,3 +1,4 @@
+import Input from '../components/input'
 import Layout from '../components/layout'
 
 
@@ -14,19 +15,14 @@ export default function Home() {
   }
 
   return (
-    <Layout name=''>
-      <div className='border rounded-md border-gray-400 w-1/2'>
+    <Layout name='Viewer'>
+      <div className=''>
         <form method='post' onSubmit={retrieveVulnerabilities}>
-          <div className='grid grid-cols-2'>
-            <label htmlFor='github-api-url'>Github API URL</label>
-            <input type='text' id='github-api-url' name='githubApiUrl' defaultValue='https://api.github.com/graphql' />
-            <label htmlFor='github-api-token'>Github API Token</label>
-            <input type='password' id='github-api-token' name='githubApiToken' autoComplete='current-password' />
-            <label htmlFor='repositories'>Repositories</label>
-            <input type='text' id='repositories' name='repositories' defaultValue='repo:nyg/dependabot-vuln-viewer user:vercel'/>
-          </div>
-          <div>
-            <button>Retrieve Vulnerabilites</button>
+          <div className='grid grid-cols-2 gap-2'>
+            <Input name='githubApiUrl' label='Github API URL' defaultValue='https://api.github.com/graphql' />
+            <Input name='githubApiToken' label='Github API Token' type='password' />
+            <Input name='repositories' label='Repositories' defaultValue='repo:nyg/dependabot-vuln-viewer user:vercel' className='col-span-2' />
+            <button className='col-span-2 font-semibold text-left pl-3 hover:underline'>Retrieve Vulnerabilites</button>
           </div>
         </form>
       </div>
