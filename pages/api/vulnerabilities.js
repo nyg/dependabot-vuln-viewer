@@ -18,7 +18,7 @@ export default async (req, res) => {
           }
           name
           url
-          vulnerabilityAlerts(first: 2) {
+          vulnerabilityAlerts(first: 15) {
             totalCount
             nodes {
               id
@@ -47,5 +47,9 @@ export default async (req, res) => {
     body: JSON.stringify({ query })
   }).json()
 
-  res.status(200).json({ resp })
+  const repos = resp.data.search.nodes
+    .filter(repo => repo.vulnerabilityAlerts.totalCount)
+    .sort((repo, another) => another.vulnerabilityAlerts.totalCount - repo.vulnerabilityAlerts.totalCount)
+
+  res.status(200).json({ repos })
 }

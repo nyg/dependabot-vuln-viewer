@@ -6,8 +6,8 @@ export default function Repo({ id, owner, name, url, vulnerabilityAlerts: vulner
   return (
     <table key={id} className='border-collapse w-full border border-black mt-3'>
       <caption className='text-left pl-3'>
-        <a href={url}>`${owner.login}/${name}`</a>
-        <span>vulnerabilities: {vulnerabilities.totalCount}</span>
+        <a href={url}>{owner.login}/{name}</a>
+        <span> ({vulnerabilities.totalCount} {vulnerabilities.totalCount > 1 ? 'vulnerabilities' : 'vulnerability'})</span>
       </caption>
       <thead>
         <tr className='text-xs'>
