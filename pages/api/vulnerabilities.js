@@ -10,7 +10,7 @@ export default async (req, res) => {
         hasNextPage
       }
       repositoryCount
-      nodes {
+      repos: nodes {
         ... on Repository {
           id
           owner {
@@ -18,18 +18,18 @@ export default async (req, res) => {
           }
           name
           url
-          vulnerabilityAlerts(first: 15) {
+          alerts: vulnerabilityAlerts(first: 15) {
             totalCount
             nodes {
               id
-              securityAdvisory {
+              advisory: securityAdvisory {
                 summary
                 description
                 permalink
                 identifiers { type value }
                 cvss { score vectorString }
               }
-              securityVulnerability {
+              vuln: securityVulnerability {
                 severity
                 package { name }
                 vulnerableVersionRange
@@ -47,9 +47,9 @@ export default async (req, res) => {
     body: JSON.stringify({ query })
   }).json()
 
-  const repos = resp.data.search.nodes
-    .filter(repo => repo.vulnerabilityAlerts.totalCount)
-    .sort((repo, another) => another.vulnerabilityAlerts.totalCount - repo.vulnerabilityAlerts.totalCount)
+  const repos = resp.data.search.repos
+    .filter(repo => repo.alerts.totalCount)
+    .sort((repo, another) => another.alerts.totalCount - repo.alerts.totalCount)
 
   res.status(200).json({ repos })
 }

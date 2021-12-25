@@ -15,10 +15,7 @@ export default function Home() {
     const body = new URLSearchParams(new FormData(event.target))
     fetch('/api/vulnerabilities', { method: 'POST', body })
       .then(response => response.json())
-      .then(json => {
-        console.log(json.repos)
-        setRepos(json.repos)
-      })
+      .then(json => setRepos(json.repos))
   }
 
   return (

@@ -1,13 +1,13 @@
 import Vulnerability from "./vulnerability"
 
 
-export default function Repo({ id, owner, name, url, vulnerabilityAlerts: vulnerabilities }) {
+export default function Repo({ id, owner, name, url, alerts }) {
 
   return (
     <table key={id} className='border-collapse w-full border border-black mt-3'>
       <caption className='text-left pl-3'>
         <a href={url}>{owner.login}/{name}</a>
-        <span> ({vulnerabilities.totalCount} {vulnerabilities.totalCount > 1 ? 'vulnerabilities' : 'vulnerability'})</span>
+        <span> ({alerts.totalCount} {alerts.totalCount > 1 ? 'vulnerabilities' : 'vulnerability'})</span>
       </caption>
       <thead>
         <tr className='text-xs'>
@@ -18,7 +18,7 @@ export default function Repo({ id, owner, name, url, vulnerabilityAlerts: vulner
         </tr>
       </thead>
       <tbody>
-        {vulnerabilities.nodes.map(Vulnerability)}
+        {alerts.nodes.map(Vulnerability)}
       </tbody>
     </table>
   )
