@@ -9,6 +9,10 @@
     }
 
     a {
-        @apply text-gray-500 hover:text-gray-900 hover:underline
+        @apply hover:underline
+    }
+
+    th {
+        @apply font-light !important
     }
 }
