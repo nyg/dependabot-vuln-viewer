@@ -4,7 +4,7 @@ import got from 'got'
 export default async (req, res) => {
 
   const query = `{
-    search(query: "${req.body.repositories}" type: REPOSITORY first: 10) {
+    search(query: "${req.body.repositories}" type: REPOSITORY first: 40) {
       pageInfo {
         endCursor
         hasNextPage
@@ -12,17 +12,28 @@ export default async (req, res) => {
       repositoryCount
       nodes {
         ... on Repository {
+          id
+          owner {
+            login
+          }
           name
           url
-          vulnerabilityAlerts(first: 10) {
+          vulnerabilityAlerts(first: 2) {
             totalCount
             nodes {
+              id
+              securityAdvisory {
+                summary
+                description
+                permalink
+                identifiers { type value }
+                cvss { score vectorString }
+              }
               securityVulnerability {
                 severity
                 package { name }
                 vulnerableVersionRange
                 firstPatchedVersion { identifier }
-                advisory { summary }
               }
             }
           }
