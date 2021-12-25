@@ -4,7 +4,7 @@ import got from 'got'
 export default async (req, res) => {
 
   const query = `{
-    search(query: "${req.body.repositories}" type: REPOSITORY first: 40) {
+    search(query: "${req.body.repositories}" type: REPOSITORY first: 50) {
       pageInfo {
         endCursor
         hasNextPage
@@ -31,7 +31,7 @@ export default async (req, res) => {
               }
               vuln: securityVulnerability {
                 severity
-                package { name }
+                package { ecosystem name }
                 vulnerableVersionRange
                 firstPatchedVersion { identifier }
               }

@@ -4,7 +4,7 @@ import Vulnerability from "./vulnerability"
 export default function Repo({ id, owner, name, url, alerts }) {
 
   return (
-    <table key={id} className='border-collapse w-full border border-black mt-3'>
+    <table key={id} className='border-collapse w-full border-t border-gray-700'>
       <caption className='text-left pl-3'>
         <a href={url}>{owner.login}/{name}</a>
         <span> ({alerts.totalCount} {alerts.totalCount > 1 ? 'vulnerabilities' : 'vulnerability'})</span>
@@ -12,9 +12,10 @@ export default function Repo({ id, owner, name, url, alerts }) {
       <thead>
         <tr className='text-xs'>
           <th></th>
-          <th className='text-left'>Dependency</th>
-          <th>Vulnerable versions</th>
-          <th>Patched version</th>
+          <th></th>
+          <th className='text-left pt-2'>Affected Dependency</th>
+          <th className='text-center pt-2'>Vulnerable</th>
+          <th className='text-center pt-2'>Patched</th>
         </tr>
       </thead>
       <tbody>

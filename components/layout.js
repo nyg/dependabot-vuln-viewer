@@ -10,18 +10,15 @@ export default function Layout({ children, name }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col min-h-screen w-[768px] mx-auto'>
+      <main className='flex flex-col min-h-screen w-[1024px] mx-auto pb-8'>
         <header>
-          <h1 className='pl-3'>Dependabot Vulnerability Viewer</h1>
+          <h1 className='pl-3 inline-block mr-3'>Dependabot Vulnerability Viewer</h1>
+          <a className='text-xs text-gray-400' href='https://github.com/nyg/dependabot-vuln-viewer'>Github</a>
         </header>
 
         <section className='flex-grow text-sm space-y-8'>
           {children}
         </section>
-
-        <footer className='p-1 text-xs text-center text-gray-500 hover:text-gray-900 border-t border-gray-400'>
-          <a href='https://github.com/nyg/dependabot-vuln-viewer'>Github</a>
-        </footer>
       </main>
     </div >
   )
