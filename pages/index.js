@@ -7,6 +7,7 @@ import Repo from '../components/repo'
 export default function Home() {
 
   const [repos, setRepos] = useState([])
+  const [stats, setStats] = useState({})
 
   const retrieveVulnerabilities = event => {
 
@@ -15,7 +16,10 @@ export default function Home() {
     const body = new URLSearchParams(new FormData(event.target))
     fetch('/api/vulnerabilities', { method: 'POST', body })
       .then(response => response.json())
-      .then(json => setRepos(json.repos))
+      .then(json => {
+        setRepos(json.repos)
+        setStats(json.stats)
+      })
   }
 
   return (
@@ -29,6 +33,14 @@ export default function Home() {
           </Input>
         </div>
       </form>
+      {stats.hasOwnProperty('repoCount') && (
+        <p className='pl-3'>
+          Searched {stats.repoCount} repositories, found {stats.vulnCount} vulnerabilities in {stats.vulnRepoCount} of them.{' '}
+          {stats.hasMoreRepos && (
+            <a href=''>Load more…</a>
+          )}
+        </p>
+      )}
       <div className='space-y-8'>
         {/* {[
   {
@@ -649,7 +661,7 @@ export default function Home() {
     }
   }
 ] */}
-{repos.map(Repo)}
+        {repos.map(Repo)}
       </div>
     </Layout>
   )

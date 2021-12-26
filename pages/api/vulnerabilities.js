@@ -51,5 +51,17 @@ export default async (req, res) => {
     .filter(repo => repo.alerts.totalCount)
     .sort((repo, another) => another.alerts.totalCount - repo.alerts.totalCount)
 
-  res.status(200).json({ repos })
+  const vulnCount = repos
+    .map(repo => repo.alerts.totalCount)
+    .reduce((a, b) => a + b, 0)
+
+  res.status(200).json({
+    repos,
+    stats: {
+      repoCount: resp.data.search.repos.length,
+      vulnRepoCount: repos.length,
+      vulnCount,
+      hasMoreRepos: resp.data.search.pageInfo.hasNextPage
+    }
+  })
 }
