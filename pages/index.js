@@ -667,7 +667,7 @@ export default function Home() {
     }
   }
 ] */}
-        {repos.map(Repo)}
+        {repos.map(repo => <Repo key={repo.id} {...repo} />)}
       </div>
     </Layout>
   )
