@@ -25,17 +25,23 @@ export default function Home() {
   return (
     <Layout name='Viewer'>
       <form method='post' onSubmit={retrieveVulnerabilities}>
-        <div className='grid grid-cols-2 gap-2'>
+        <div className='grid grid-cols-3 gap-2'>
           <Input name='githubApiUrl' label='Github API URL' defaultValue='https://api.github.com/graphql' />
           <Input name='githubApiToken' label='Github API Token' defaultValue={process.env.NEXT_PUBLIC_API_TOKEN} type='password' />
-          <Input name='repositories' label='Repositories' defaultValue={process.env.NEXT_PUBLIC_REPOS} className='col-span-2' >
+
+          <div className='grid grid-cols-2 gap-2'>
+            <Input name='reposPerReq' label='Repos fetched / req' defaultValue={50} />
+            <Input name='vulnsPerReq' label='Vulns fetched / req' defaultValue={15} />
+          </div>
+
+          <Input name='repositories' label='Repositories' defaultValue={process.env.NEXT_PUBLIC_REPOS} className='col-span-full' >
             <button className='px-3 m-1 bg-gray-600 text-gray-100 rounded hover:bg-gray-500'>Search</button>
           </Input>
         </div>
       </form>
-      {stats.hasOwnProperty('repoCount') && (
+      {Object.keys(stats).length > 0 && (
         <p className='pl-3'>
-          Searched {stats.repoCount} repositories, found {stats.vulnCount} vulnerabilities in {stats.vulnRepoCount} of them.{' '}
+          Searched {stats.fetchedRepoCount} of {stats.totalRepoCount} repositories, found {stats.vulnCount} vulnerabilities in {stats.vulnRepoCount} of them.{' '}
           {stats.hasMoreRepos && (
             <a href=''>Load more…</a>
           )}

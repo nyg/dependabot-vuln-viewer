@@ -9,7 +9,7 @@ const highestSeverityFirst = ({ vuln }, { vuln: another }) =>
 export default async (req, res) => {
 
   const query = `{
-    search(query: "${req.body.repositories}" type: REPOSITORY first: 50) {
+    search(query: "${req.body.repositories}" type: REPOSITORY first: ${req.body.reposPerReq}) {
       pageInfo {
         endCursor
         hasNextPage
@@ -23,7 +23,7 @@ export default async (req, res) => {
           }
           name
           url
-          alerts: vulnerabilityAlerts(first: 15) {
+          alerts: vulnerabilityAlerts(first: ${req.body.vulnsPerReq}) {
             totalCount
             nodes {
               id
@@ -52,6 +52,11 @@ export default async (req, res) => {
     body: JSON.stringify({ query })
   }).json()
 
+  if (resp.hasOwnProperty('errors')) {
+    res.status(200).json({ errors: resp.errors })
+    return
+  }
+
   const repos = resp.data.search.repos
     .filter(repo => repo.alerts.totalCount)
     .sort((repo, another) => another.alerts.totalCount - repo.alerts.totalCount)
@@ -65,7 +70,8 @@ export default async (req, res) => {
   res.status(200).json({
     repos,
     stats: {
-      repoCount: resp.data.search.repos.length,
+      totalRepoCount: resp.data.search.repositoryCount,
+      fetchedRepoCount: resp.data.search.repos.length,
       vulnRepoCount: repos.length,
       vulnCount,
       hasMoreRepos: resp.data.search.pageInfo.hasNextPage

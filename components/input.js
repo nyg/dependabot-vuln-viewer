@@ -9,7 +9,7 @@ export default function Input({ name, type = 'text', defaultValue, label, classN
         htmlFor={name}>{label}</label>
       <div className='flex'>
         <input
-          className='p-1 pl-2 m-1 outline-none bg-gray-200 rounded grow'
+          className='p-1 pl-2 m-1 outline-none bg-gray-200 rounded grow' size={1}
           type={type} id={name} name={name} defaultValue={defaultValue} autoComplete={autoComplete} />
         {children}
       </div>
