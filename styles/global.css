@@ -4,14 +4,6 @@
 
 @layer base {
 
-    h1 {
-        @apply text-xl pt-2 pb-4
-    }
-
-    a {
-        @apply hover:underline
-    }
-
     th {
         @apply font-light !important
     }
