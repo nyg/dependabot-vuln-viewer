@@ -5,6 +5,6 @@
 @layer base {
 
     th {
-        @apply font-light !important
+        @apply font-light py-0 !important
     }
 }
