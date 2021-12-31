@@ -40,8 +40,8 @@ export default function Home() {
         <div className='grid grid-cols-6 gap-x-3 mb-3' id='settings'>
           <Input className='col-span-2' name='githubApiUrl' label='Github API URL' defaultValue='https://api.github.com/graphql' />
           <Input className='col-span-2' name='githubApiToken' label='Github API Token' defaultValue={process.env.NEXT_PUBLIC_API_TOKEN} type='password' />
-          <Input name='reposPerReq' label='Repos fetched / req' defaultValue={50} />
-          <Input name='vulnsPerReq' label='Vulns fetched / req' defaultValue={15} />
+          <Input name='reposPerReq' label='Repos / request' defaultValue={50} />
+          <Input name='vulnsPerReq' label='Vulns / request' defaultValue={3} />
         </div>
 
         <div className='flex items-end gap-x-3'>
