@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import Menu from './menu'
-
-const isMenu = type => type?.name === (<Menu />).type.name
+import Menu from './menu/menu'
 
 
 export default function Layout({ children, name }) {
@@ -17,11 +15,11 @@ export default function Layout({ children, name }) {
         <header className='pl-3 mt-1 mb-4 flex items-baseline gap-x-3'>
           <h1 className='text-xl'>Dependabot Vulnerability Viewer</h1>
           <span className='flex-grow'></span>
-          {children.find(({ type }) => isMenu(type))}
+          <Menu />
         </header>
 
         <section className='flex-grow text-sm space-y-6'>
-          {children.filter(({ type }) => !isMenu(type))}
+          {children}
         </section>
       </main>
     </div>

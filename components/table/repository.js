@@ -1,7 +1,12 @@
 import Vulnerability from "./vulnerability"
+import { highestSeverityFirst } from "../../utils/config"
 
 
-export default function Repo({ owner, name, url, alerts }) {
+export default function Repository({ owner, name, url, alerts }) {
+
+  const vulnerabilities = alerts.nodes
+    .map(alert => <Vulnerability key={alert.id} {...alert} />)
+    .sort(highestSeverityFirst)
 
   return (
     <table className='border-collapse w-full'>
@@ -16,7 +21,7 @@ export default function Repo({ owner, name, url, alerts }) {
         </tr>
       </thead>
       <tbody className='before:block before:h-2'>
-        {alerts.nodes.map(alert => <Vulnerability key={alert.id} {...alert} />)}
+        {vulnerabilities}
       </tbody>
     </table>
   )
