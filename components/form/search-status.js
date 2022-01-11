@@ -1,4 +1,8 @@
-export default function SearchStatus({ loading, error, stats }) {
+import eventBus from '../../utils/event-bus'
+import { sumVulnCount } from '../../utils/config'
+
+
+export default function SearchStatus({ loading, error, data, repos }) {
 
   if (loading) {
     return <p className='pl-3 italic'>Loading…</p>
@@ -9,11 +13,22 @@ export default function SearchStatus({ loading, error, stats }) {
     return <p className='pl-3 text-red-600 font-semibold'>Error: {error.message}</p>
   }
 
-  if (Object.keys(stats).length) {
+  if (data) {
+
+    const vulnCount = repos.reduce(sumVulnCount, 0)
+    const vulnRepoCount = repos.length
+    const totalRepoCount = data.search.repositoryCount
+    const fetchedRepoCount = data.search.repos.length
+    const hasMoreRepos = data.search.pageInfo.hasNextPage
+
     return (
       <p className='pl-3'>
-        Searched {stats.fetchedRepoCount} of {stats.totalRepoCount} repositories, found {stats.vulnCount} vulnerabilities in {stats.vulnRepoCount} of them.
-        {stats.hasMoreRepos && (<a href=''>Load more…</a>)}
+        Searched {fetchedRepoCount} of {totalRepoCount} repositories, found {vulnCount} vulnerabilities in {vulnRepoCount} of them.{' '}
+        {hasMoreRepos && (
+          <a className='font-semibold hover:underline cursor-pointer' onClick={() => eventBus.dispatch('load.more.clicked', { cursor: data.search.pageInfo.endCursor })}>
+            Load more…
+          </a>
+        )}
       </p>
     )
   }

@@ -1,8 +1,10 @@
 import { gql } from "@apollo/client"
 
 export const FETCH_REPOS = gql`
-  query FetchRepos($query: String! $repoCount: Int! $vulnCount: Int!) {
-    search(query: $query type: REPOSITORY first: $repoCount) {
+  query FetchRepos($query: String!
+                   $repoCount: Int! $afterRepo: String
+                   $vulnCount: Int!) {
+    search(query: $query type: REPOSITORY first: $repoCount after: $afterRepo) {
       pageInfo {
         endCursor
         hasNextPage

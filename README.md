@@ -25,10 +25,7 @@ npm run dev # localhost:3000
 
 ## Improvements
 
-* Use Apollo
-    * pagination for repos
-    * error & loading handling
-    * pagination for vuln?
+* Pagination for vuln (?)
 * Show description of vuln
 * Hosting on Vercel + OAuth login
     * impact for GH Enterprise?
