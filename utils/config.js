@@ -17,9 +17,6 @@ export const sumVulnCount = (sum, repo) => {
   return sum + repo.alerts.totalCount
 }
 
-export const highestVulnCountFirst = (repo, another) =>
-  another.alerts.totalCount - repo.alerts.totalCount
-
 export const highestSeverityFirst = ({ props: { vuln } }, { props: { vuln: anotherVuln } }) =>
   severityImportance[anotherVuln.severity] - severityImportance[vuln.severity]
 

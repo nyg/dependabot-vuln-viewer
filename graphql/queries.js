@@ -2,14 +2,16 @@ import { gql } from "@apollo/client"
 
 export const FETCH_REPOS = gql`
   query FetchRepos($query: String!
-                   $repoCount: Int! $afterRepo: String
+                   $repoCount: Int! $lastRepo: String
                    $vulnCount: Int!) {
-    search(query: $query type: REPOSITORY first: $repoCount after: $afterRepo) {
+    search(type: REPOSITORY query: $query first: $repoCount after: $lastRepo) {
       pageInfo {
-        endCursor
-        hasNextPage
+        lastRepo: endCursor
+        hasMoreRepos: hasNextPage
       }
-      repositoryCount
+      totalRepoCount: repositoryCount
+      fetchedRepoCount @client
+      vulnCount @client
       repos: nodes {
         ... on Repository {
           id
