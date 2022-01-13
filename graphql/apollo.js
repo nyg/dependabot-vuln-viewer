@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, ApolloLink, HttpLink, from } from '@apollo/client'
-import { vulnerableRepos, sumVulnCount } from '../utils/config'
+import { vulnerableRepos, sumVulnCount, severityImportance } from '../utils/config'
 
 const cacheOptions = {
   typePolicies: {
@@ -24,14 +24,34 @@ const cacheOptions = {
           }
         }
       }
+    },
+    Repository: {
+      fields: {
+        vulnerabilityAlerts: {
+          keyArgs: false,
+          merge(existing = { nodes: [] }, incoming, { readField }) {
+
+            const severity = alertRef =>
+              readField('securityVulnerability', alertRef).severity
+
+            const highestSeverityFirst = (alertRef, anotherAlertRef) =>
+              severityImportance[severity(anotherAlertRef)] - severityImportance[severity(alertRef)]
+
+            return {
+              ...incoming,
+              nodes: existing.nodes.concat(incoming.nodes).sort(highestSeverityFirst)
+            }
+          }
+        }
+      }
     }
   }
 }
 
-const fetchReposLink = new ApolloLink((operation, forward) => {
+const searchReposProcessingLink = new ApolloLink((operation, forward) => {
 
   const observable = forward(operation)
-  if (operation.operationName !== 'FetchRepos') {
+  if (operation.operationName !== 'SearchRepos') {
     return observable
   }
 
@@ -45,5 +65,5 @@ const fetchReposLink = new ApolloLink((operation, forward) => {
 
 export default new ApolloClient({
   cache: new InMemoryCache(cacheOptions),
-  link: from([fetchReposLink, new HttpLink()])
+  link: from([searchReposProcessingLink, new HttpLink()])
 })

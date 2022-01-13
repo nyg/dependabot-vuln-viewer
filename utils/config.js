@@ -17,8 +17,8 @@ export const sumVulnCount = (sum, repo) => {
   return sum + repo.alerts.totalCount
 }
 
-export const highestSeverityFirst = ({ props: { vuln } }, { props: { vuln: anotherVuln } }) =>
-  severityImportance[anotherVuln.severity] - severityImportance[vuln.severity]
-
 export const cveFirstThenGhsa = ({ type }, { anotherType }) =>
   type.localeCompare(anotherType)
+
+export const authHeader = token =>
+  ({ 'Authorization': `Bearer ${token}` })

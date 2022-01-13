@@ -1,26 +1,39 @@
 import { useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import SearchStatus from './search-status'
-import { FETCH_REPOS } from '../../graphql/queries'
+import { FETCH_REPO, SEARCH_REPOS } from '../../graphql/queries'
 import Repository from '../table/repository'
 import eventBus from '../../utils/event-bus'
+import { authHeader } from '../../utils/config'
 
 
 export default function SearchResults() {
 
-  const [gqlFetchRepos, { loading, error, data, fetchMore }] = useLazyQuery(FETCH_REPOS)
+  const [gqlSearchRepos, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_REPOS, { notifyOnNetworkStatusChange: true })
 
-  const fetchRepos = ({ query, repoCount, vulnCount, uri, token }) =>
-    gqlFetchRepos({
+  let settings
+  const searchRepos = ({ query, repoCount, vulnCount, uri, token }) => {
+    settings = { vulnCount, uri, token }
+    gqlSearchRepos({
       variables: { query, repoCount, vulnCount },
-      context: { uri, headers: { 'Authorization': `Bearer ${token}` } }
+      context: { uri, headers: authHeader(token) }
     })
+  }
 
-  const fetchMoreRepos = ({ lastRepo }) =>
-    fetchMore({ variables: { lastRepo } })
+  const loadMoreRepos = variables =>
+    fetchMore({ variables })
 
-  useEffect(() => eventBus.on('search.form.submitted', fetchRepos), [])
-  useEffect(() => eventBus.on('load.more.clicked', fetchMoreRepos), [])
+  const loadMoreVulns = variables => {
+    fetchMore({
+      query: FETCH_REPO,
+      variables: { ...variables, vulnCount: settings.vulnCount },
+      context: { uri: settings.uri, headers: authHeader(settings.token) }
+    })
+  }
+
+  useEffect(() => eventBus.on('search.form.submitted', searchRepos), [])
+  useEffect(() => eventBus.on('load.more.repos.clicked', loadMoreRepos), [])
+  useEffect(() => eventBus.on('load.more.vulns.clicked', loadMoreVulns), [])
 
   return (
     <>

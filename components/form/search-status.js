@@ -17,13 +17,13 @@ export default function SearchStatus({ loading, error, data }) {
     const vulnRepoCount = data.search.repos.length
     const { totalRepoCount, fetchedRepoCount, vulnCount } = data.search
     const { hasMoreRepos, lastRepo } = data.search.pageInfo
-    const loadMoreClicked = () => eventBus.dispatch('load.more.clicked', { lastRepo })
+    const loadMoreClicked = () => eventBus.dispatch('load.more.repos.clicked', { lastRepo })
 
     return (
       <p className='pl-3'>
         Searched {fetchedRepoCount} of {totalRepoCount} repositories, found {vulnCount} vulnerabilities in {vulnRepoCount} of them.
         {hasMoreRepos && (
-          <>{' '}<a className='font-semibold hover:underline cursor-pointer' onClick={loadMoreClicked}>Load more…</a></>
+          <>{' '}<a className='font-semibold cursor-pointer hover:underline' onClick={loadMoreClicked}>Load more…</a></>
         )}
       </p>
     )
