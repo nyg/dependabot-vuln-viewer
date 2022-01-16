@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
 const VULN_ALERT_FRAGMENT = gql`
-  fragment VulnerabilityAlerts on Repository {
+  fragment VulnerabilityAlertsFragment on Repository {
     alerts: vulnerabilityAlerts(first: $vulnCount after: $lastVuln) {
       totalCount
       pageInfo {
@@ -48,7 +48,7 @@ export const SEARCH_REPOS = gql`
           owner {
             login
           }
-          ...VulnerabilityAlerts
+          ...VulnerabilityAlertsFragment
         }
       }
     }
@@ -60,6 +60,6 @@ export const FETCH_REPO = gql`
                   $vulnCount: Int! $lastVuln: String) {
     repository(owner: $owner name: $name) {
       id
-      ...VulnerabilityAlerts
+      ...VulnerabilityAlertsFragment
     }
   }`
