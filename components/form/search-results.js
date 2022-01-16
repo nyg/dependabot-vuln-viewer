@@ -9,7 +9,10 @@ import { authHeader } from '../../utils/config'
 
 export default function SearchResults() {
 
-  const [gqlSearchRepos, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_REPOS, { notifyOnNetworkStatusChange: true })
+  const [gqlSearchRepos, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_REPOS, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only'
+  })
 
   let settings
   const searchRepos = ({ query, repoCount, vulnCount, uri, token }) => {
