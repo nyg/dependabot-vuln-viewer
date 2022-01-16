@@ -11,7 +11,6 @@ export default function SearchResults() {
 
   const [gqlSearchRepos, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_REPOS, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only'
   })
 
   let settings
