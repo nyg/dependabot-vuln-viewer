@@ -1,5 +1,12 @@
 {
   "extends": [
-    "config:base"
+    "group:allNonMajor",
+    "npm:unpublishSafe"
+  ],
+  "dependencyDashboard": true,
+  "rangeStrategy": "pin",
+  "prCreation": "not-pending",
+  "schedule": [
+    "at 5:00 am every saturday"
   ]
 }
