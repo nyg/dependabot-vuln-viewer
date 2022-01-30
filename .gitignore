@@ -19,6 +19,7 @@
 example.graphql
 .DS_Store
 *.pem
+*.log
 
 # debug
 npm-debug.log*

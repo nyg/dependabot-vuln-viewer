@@ -1,12 +1,17 @@
 {
   "extends": [
-    "group:allNonMajor",
-    "npm:unpublishSafe"
+    "group:allNonMajor"
   ],
   "dependencyDashboard": true,
   "rangeStrategy": "pin",
-  "prCreation": "not-pending",
+  "prCreation": "immediate",
+  "stabilityDays": 3,
+  "separateMultipleMajor": true,
   "schedule": [
     "at 5:00 am every saturday"
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "stabilityDays": 0,
+    "automerge": true
+  }
 }
