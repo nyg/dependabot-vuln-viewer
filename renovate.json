@@ -5,14 +5,6 @@
   "schedule": [
     "at 5:00 am every saturday"
   ],
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "*"
-      ],
-      "enabled": true
-    }
-  ],
   "branchPrefix": "renovate-",
   "dependencyDashboard": true,
   "ignorePaths": [],
@@ -21,7 +13,8 @@
   "separateMultipleMajor": true,
   "stabilityDays": 3,
   "vulnerabilityAlerts": {
-    "stabilityDays": 0,
-    "automerge": true
+    "automerge": true,
+    "enabled": true,
+    "stabilityDays": 0
   }
 }
