@@ -2,14 +2,24 @@
   "extends": [
     "group:allNonMajor"
   ],
-  "dependencyDashboard": true,
-  "rangeStrategy": "pin",
-  "prCreation": "immediate",
-  "stabilityDays": 3,
-  "separateMultipleMajor": true,
   "schedule": [
     "at 5:00 am every saturday"
   ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "enabled": true
+    }
+  ],
+  "branchPrefix": "renovate-",
+  "dependencyDashboard": true,
+  "ignorePaths": [],
+  "prCreation": "immediate",
+  "rangeStrategy": "pin",
+  "separateMultipleMajor": true,
+  "stabilityDays": 3,
   "vulnerabilityAlerts": {
     "stabilityDays": 0,
     "automerge": true
