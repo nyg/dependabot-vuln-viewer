@@ -14,7 +14,6 @@
   "stabilityDays": 3,
   "vulnerabilityAlerts": {
     "automerge": true,
-    "enabled": true,
     "stabilityDays": 0
   }
 }
