@@ -8,24 +8,12 @@
   "branchPrefix": "renovate-",
   "dependencyDashboard": true,
   "ignorePaths": [],
-  "prCreation": "immediate",
+  "prCreation": "not-pending",
   "rangeStrategy": "pin",
   "separateMultipleMajor": true,
   "stabilityDays": 3,
   "vulnerabilityAlerts": {
     "automerge": true,
-    "enabled": true,
     "stabilityDays": 0
-  },
-  "npm": {
-    "enabled": true
-  },
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "*"
-      ],
-      "enabled": true
-    }
-  ]
+  }
 }
