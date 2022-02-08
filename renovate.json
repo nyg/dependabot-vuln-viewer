@@ -1,7 +1,4 @@
 {
-  "schedule": [
-    "at 5:00 am every saturday"
-  ],
   "packageRules": [
     {
       "matchPackagePatterns": [
@@ -11,6 +8,9 @@
         "minor",
         "patch"
       ],
+      "schedule": [
+        "at 5:00 am every saturday"
+      ],
       "groupName": "all stable non-major dependencies",
       "groupSlug": "all-stable-minor-patch",
       "stabilityDays": 3
@@ -19,7 +19,7 @@
   "branchPrefix": "renovate-",
   "dependencyDashboard": true,
   "ignorePaths": [],
-  "prCreation": "not-pending",
+  "prCreation": "immediate",
   "rangeStrategy": "pin",
   "separateMultipleMajor": true,
   "stabilityDays": 3,
