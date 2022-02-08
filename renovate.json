@@ -1,5 +1,4 @@
 {
-  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchPackagePatterns": [
@@ -20,6 +19,7 @@
   "branchPrefix": "renovate-",
   "dependencyDashboard": true,
   "ignorePaths": [],
+  "internalChecksFilter": "strict",
   "prCreation": "immediate",
   "rangeStrategy": "pin",
   "separateMultipleMajor": true,
