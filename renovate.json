@@ -1,9 +1,20 @@
 {
-  "extends": [
-    "group:allNonMajor"
-  ],
   "schedule": [
     "at 5:00 am every saturday"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "stabilityDays": 3
+    }
   ],
   "branchPrefix": "renovate-",
   "dependencyDashboard": true,
