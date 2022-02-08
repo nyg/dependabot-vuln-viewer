@@ -1,4 +1,5 @@
 {
+  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchPackagePatterns": [
