@@ -11,8 +11,8 @@
         "minor",
         "patch"
       ],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
+      "groupName": "all stable non-major dependencies",
+      "groupSlug": "all-stable-minor-patch",
       "stabilityDays": 3
     }
   ],
