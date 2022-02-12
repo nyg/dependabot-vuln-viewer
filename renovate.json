@@ -1,4 +1,5 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
       "matchPackagePatterns": [
@@ -24,6 +25,7 @@
   "rangeStrategy": "pin",
   "separateMultipleMajor": true,
   "stabilityDays": 3,
+  "timezone": "Europe/Zurich",
   "vulnerabilityAlerts": {
     "automerge": true,
     "stabilityDays": 0
