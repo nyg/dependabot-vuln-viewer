@@ -23,7 +23,7 @@
     "debug-renovate": "LOG_LEVEL=debug renovate --dry-run=true --print-config=true nyg/dependabot-vuln-viewer > renovate.log"
   },
   "dependencies": {
-    "@apollo/client": "3.5.8",
+    "@apollo/client": "3.5.9",
     "graphql": "16.3.0",
     "next": "12.1.0",
     "react": "17.0.2",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "autoprefixer": "10.4.2",
     "postcss": "8.4.6",
-    "renovate": "31.70.0",
-    "tailwindcss": "3.0.19"
+    "renovate": "31.84.2",
+    "tailwindcss": "3.0.23"
   }
 }
