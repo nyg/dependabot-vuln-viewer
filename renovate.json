@@ -14,7 +14,8 @@
       ],
       "groupName": "all stable non-major dependencies",
       "groupSlug": "all-stable-minor-patch",
-      "stabilityDays": 3
+      "stabilityDays": 3,
+      "automerge": true
     }
   ],
   "branchPrefix": "renovate-",
