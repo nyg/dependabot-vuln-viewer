@@ -10,7 +10,7 @@
         "patch"
       ],
       "schedule": [
-        "after 2am and before 12am every saturday"
+        "after 5am and before 11am every saturday"
       ],
       "groupName": "all stable non-major dependencies",
       "groupSlug": "all-stable-minor-patch",
