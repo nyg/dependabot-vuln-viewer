@@ -42,11 +42,10 @@ npm run dev # localhost:3000
 
 ## Improvements
 
-* Show description of vulnerabilities
-* Store settings in `localstorage`
+* Display description of vulnerabilities
 * Add OAuth login
-    * possible for GitHub Enterprise?
-* Check Apollo doc for error handling, ssr, fetch policy, etc.
+    * GitHub Enterprise (?)
+* Store settings in `localstorage`
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
