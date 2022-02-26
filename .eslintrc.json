@@ -1,0 +1,16 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "indent": [
+      2,
+      3
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "react-hooks/exhaustive-deps": [
+      0
+    ]
+  }
+}
