@@ -4,10 +4,10 @@ import SearchResults from '../components/form/search-results'
 
 
 export default function Home() {
-  return (
-    <Layout name='Vulnerability Viewer'>
-      <SearchForm />
-      <SearchResults />
-    </Layout>
-  )
+   return (
+      <Layout name='Vulnerability Viewer'>
+         <SearchForm />
+         <SearchResults />
+      </Layout>
+   )
 }
