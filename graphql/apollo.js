@@ -14,6 +14,7 @@ const handleSearchReposOperation = response => {
       //       .catch(reason => { console.log('rejected', reason) })
       // })
 
+      // can/should this be done in the type policy?
       response.data.search.fetchedRepoCount = response.data.search.repos.length
       response.data.search.repos = response.data.search.repos.filter(vulnerableRepos)
       response.data.search.vulnCount = response.data.search.repos.reduce(sumVulnCount, 0)
