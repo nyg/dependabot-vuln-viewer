@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 const VULN_ALERT_FRAGMENT = gql`
   fragment VulnerabilityAlertsFragment on Repository {
-    alerts: vulnerabilityAlerts(first: $vulnCount after: $lastVuln) {
+    alerts: vulnerabilityAlerts(first: $vulnCount after: $lastVuln states: OPEN) {
       totalCount
       pageInfo {
         lastVuln: endCursor
