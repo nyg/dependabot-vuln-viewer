@@ -1,5 +1,6 @@
-import Vulnerability from "./vulnerability"
-import eventBus from "../../utils/event-bus"
+import Vulnerability from './vulnerability'
+import eventBus from '../../utils/event-bus'
+import Link from '../link'
 
 
 export default function Repository({ owner: { login: owner }, name, url, alerts }) {
@@ -14,7 +15,7 @@ export default function Repository({ owner: { login: owner }, name, url, alerts 
          <thead>
             <tr className='text-xs border-b border-b-gray-700'>
                <th className='text-left text-sm pl-3' colSpan='3'>
-                  <a className='font-semibold hover:underline' href={`${url}/security/dependabot`} target='_blank' rel='noopener noreferrer'>{owner}/{name}</a>
+                  <Link className='font-semibold' href={`${url}/security/dependabot`}>{owner}/{name}</Link>
                   <span> ({alerts.totalCount} vulnerabilit{alerts.totalCount > 1 ? 'ies' : 'y'})</span>
                </th>
                <th className='text-center'>Vulnerable</th>
