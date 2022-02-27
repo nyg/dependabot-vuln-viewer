@@ -29,8 +29,8 @@ export default function Repository({ owner: { login: owner }, name, url, alerts 
             <tfoot>
                <tr>
                   <td colSpan={2}></td>
-                  <td colSpan={3} className='font-[545] cursor-pointer hover:underline'>
-                     <a onClick={loadMoreClicked}>load more…</a>
+                  <td colSpan={3} className='font-[545]'>
+                     <a onClick={loadMoreClicked} className='cursor-pointer hover:underline'>load more…</a>
                   </td>
                </tr>
             </tfoot>
