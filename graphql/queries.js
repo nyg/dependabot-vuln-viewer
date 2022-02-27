@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from '@apollo/client'
 
 const VULN_ALERT_FRAGMENT = gql`
   fragment VulnerabilityAlertsFragment on Repository {
