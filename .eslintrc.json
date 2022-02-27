@@ -2,11 +2,14 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "indent": [
-      2,
-      3
+      "error",
+      3,
+      {
+        "SwitchCase": 1
+      }
     ],
     "semi": [
-      2,
+      "error",
       "never"
     ],
     "react-hooks/exhaustive-deps": [
