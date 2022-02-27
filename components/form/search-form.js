@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import Input from './input'
 import eventBus from '../../utils/event-bus'
+import Input from './input'
+import { useEffect } from 'react'
 
 const onSubmit = event => {
    event.preventDefault()

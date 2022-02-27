@@ -18,6 +18,12 @@
     "quotes": [
       "error",
       "single"
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true
+      }
     ]
   }
 }

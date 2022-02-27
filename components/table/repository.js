@@ -1,6 +1,6 @@
-import Vulnerability from './vulnerability'
 import eventBus from '../../utils/event-bus'
 import Link from '../link'
+import Vulnerability from './vulnerability'
 
 
 export default function Repository({ owner: { login: owner }, name, url, alerts }) {

@@ -1,10 +1,10 @@
+import { FETCH_REPO, SEARCH_REPOS } from '../../graphql/queries'
+import { authHeader } from '../../utils/config'
+import eventBus from '../../utils/event-bus'
+import Repository from '../table/repository'
+import SearchStatus from './search-status'
 import { useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import SearchStatus from './search-status'
-import { FETCH_REPO, SEARCH_REPOS } from '../../graphql/queries'
-import Repository from '../table/repository'
-import eventBus from '../../utils/event-bus'
-import { authHeader } from '../../utils/config'
 
 
 export default function SearchResults() {

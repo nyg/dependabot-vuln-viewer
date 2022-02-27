@@ -1,6 +1,6 @@
-import { ApolloClient, InMemoryCache, ApolloLink, HttpLink, from } from '@apollo/client'
-import { vulnerableRepos, sumVulnCount } from '../utils/config'
+import { ApolloClient, ApolloLink, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { Query, Repository } from './type-policies'
+import { sumVulnCount, vulnerableRepos } from '../utils/config'
 
 
 const handleSearchReposOperation = response => {
