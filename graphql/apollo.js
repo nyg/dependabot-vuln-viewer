@@ -23,12 +23,15 @@ const handleSearchReposOperation = response => {
    return response
 }
 
-const handlers = {
-   'SearchRepos': handleSearchReposOperation
+const getHandler = operation => {
+   switch (operation) {
+      case 'SearchRepos': return handleSearchReposOperation
+      default: return response => response
+   }
 }
 
 const operationProcessingLink = new ApolloLink((operation, forward) => {
-   return forward(operation).map(handlers[operation.operationName])
+   return forward(operation).map(getHandler(operation.operationName))
 })
 
 
