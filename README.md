@@ -42,10 +42,10 @@ npm run dev # localhost:3000
 
 ## Improvements
 
-* Display description of vulnerabilities
-* Add OAuth login
-    * GitHub Enterprise (?)
+* Display repositories which have alerts disabled
+* Add OAuth login, GitHub Enterprise (?)
 * Store settings in `localstorage`
+* Check graphql query in GHE for "state"
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
