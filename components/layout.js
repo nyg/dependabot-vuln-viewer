@@ -11,8 +11,8 @@ export default function Layout({ children, name }) {
             <link rel='icon' href='/favicon.ico' />
          </Head>
 
-         <main className='flex flex-col w-[1024px] mx-auto pb-6'>
-            <header className='pl-3 mt-1 mb-4 flex items-baseline gap-x-3'>
+         <main className='flex flex-col w-[1024px] mx-auto pb-12'>
+            <header className='pl-3 mt-4 mb-4 flex items-baseline gap-x-3'>
                <h1 className='text-xl'>Dependabot Vulnerability Viewer</h1>
                <span className='flex-grow'></span>
                <Menu />
