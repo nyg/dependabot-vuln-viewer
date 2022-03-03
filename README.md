@@ -28,8 +28,8 @@ Can be any valid [advanced search][] query string:
 ### Personal Access Token
 
 See [here][] to create a personal access token for the GitHub API. Only the
-`repo` [scope][] is needed, or `public_repo` if you don't care about your
-private repositories.
+`repo` [scope][] is needed, or `public_repo` if you don't care about private
+repositories.
 
 ## Install & Run
 
