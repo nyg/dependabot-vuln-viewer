@@ -24,7 +24,13 @@ export const severityImportance = {
 }
 
 
-export const vulnerableRepos = repo =>
+export const hasAlertsDisabled = repo =>
+   !repo.alertsEnabled
+
+export const isRepoAccessible = repo =>
+   repo.viewerPermission == 'ADMIN'
+
+export const isRepoVulnerable = repo =>
    repo.alerts.totalCount > 0
 
 export const sumVulnCount = (sum, repo) =>

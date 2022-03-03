@@ -45,9 +45,8 @@ export const SEARCH_REPOS = gql`
           id
           name
           url
-          owner {
-            login
-          }
+          owner { login }
+          viewerPermission
           ...VulnerabilityAlertsFragment
         }
       }
