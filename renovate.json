@@ -30,5 +30,8 @@
   "vulnerabilityAlerts": {
     "automerge": true,
     "stabilityDays": 0
-  }
+  },
+  "ignoreDeps": [
+    "@apollo/client"
+  ]
 }
