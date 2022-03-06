@@ -42,8 +42,9 @@ npm run dev # localhost:3000
 
 ## Improvements
 
-* Display repositories which have alerts disabled
-* Add OAuth login, GitHub Enterprise (?)
+* Display list of repositories which have alerts disabled
+* Fix duplicate vuln issue after search/load more
+* Add OAuth login, GitHub Enterprise
 * Store settings in `localstorage`
 * Check graphql query in GHE for "state"
 

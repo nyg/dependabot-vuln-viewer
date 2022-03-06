@@ -24,9 +24,6 @@ export const severityImportance = {
 }
 
 
-export const hasAlertsDisabled = repo =>
-   !repo.alertsEnabled
-
 export const isRepoAccessible = repo =>
    repo.viewerPermission == 'ADMIN'
 

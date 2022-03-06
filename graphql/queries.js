@@ -40,6 +40,8 @@ export const SEARCH_REPOS = gql`
       totalRepoCount: repositoryCount
       fetchedRepoCount @client
       vulnCount @client
+      alertsDisabledRepos @client
+      inaccessibleRepos @client
       repos: nodes {
         ... on Repository {
           id
@@ -62,3 +64,8 @@ export const FETCH_REPO = gql`
       ...VulnerabilityAlertsFragment
     }
   }`
+
+export const WRITE_ALERTS_DISABLED_REPO = gql`
+   fragment WriteAlertsDisabledRepo on Query {
+      search(query: $query)
+   }`
