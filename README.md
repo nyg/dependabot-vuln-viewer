@@ -42,10 +42,9 @@ npm run dev # localhost:3000
 
 ## Improvements
 
-* Display list of repositories which have alerts disabled
 * Fix duplicate vuln issue after search/load more
 * Add OAuth login, GitHub Enterprise
-* Store settings in `localstorage`
+* Store settings in `localStorage`
 * Check graphql query in GHE for "state"
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
