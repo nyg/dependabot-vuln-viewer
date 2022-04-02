@@ -11,7 +11,7 @@ const toTooltip = repos =>
 export default function SearchStatus({ loading, error, data }) {
 
    if (loading) return <p className='pl-3 italic'>Loading…<br />&nbsp;</p>
-   if (error) return <p className='pl-3 text-red-600 font-semibold'>Error: {error.message}</p>
+   if (error) return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
 
    if (data) {
 
@@ -33,8 +33,8 @@ export default function SearchStatus({ loading, error, data }) {
          <p className='pl-3'>
             Searched {fetchedRepoCount} of {totalRepoCount} repositories{hasMoreReposText}<br />
             Found {vulnRepoCount} with {vulnCount} vulnerabilities,{' '}
-            <Tooltip value={toTooltip(inaccessibleRepos)}>{inaccessibleCount} with insufficient access</Tooltip>,{' '}
-            <Tooltip value={toTooltip(alertsDisabledRepos)}>{disabledCount} with alerts disabled</Tooltip>{' '}
+            <Tooltip enabled={inaccessibleCount} value={toTooltip(inaccessibleRepos)}>{inaccessibleCount} with insufficient access</Tooltip>,{' '}
+            <Tooltip enabled={disabledCount} value={toTooltip(alertsDisabledRepos)}>{disabledCount} with alerts disabled</Tooltip>{' '}
             and {zeroVulnRepoCount} without vulnerabilities.
          </p>
       )

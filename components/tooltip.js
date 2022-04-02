@@ -1,5 +1,5 @@
-export default function Tooltip({ value, children }) {
-   return (
+export default function Tooltip({ value, enabled, children }) {
+   return enabled ? (
       <span className='has-tooltip relative cursor-pointer border-b border-dotted border-b-gray-700'>
          {children}
          <div className='tooltip absolute hidden cursor-auto pt-3 left-1/2 -translate-x-1/2'>
@@ -8,5 +8,5 @@ export default function Tooltip({ value, children }) {
             </div>
          </div>
       </span>
-   )
+   ) : <>{children}</>
 }
