@@ -36,7 +36,7 @@
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
     "postcss": "8.4.12",
-    "renovate": "32.20.1",
+    "renovate": "32.26.3",
     "tailwindcss": "3.0.24"
   }
 }
