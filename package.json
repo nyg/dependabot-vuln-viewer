@@ -25,7 +25,7 @@
   "dependencies": {
     "@apollo/client": "3.5.7",
     "github-markdown-css": "5.1.0",
-    "graphql": "16.4.0",
+    "graphql": "16.5.0",
     "next": "12.1.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "autoprefixer": "10.4.7",
-    "eslint": "8.14.0",
+    "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
     "postcss": "8.4.13",
-    "renovate": "32.40.0",
+    "renovate": "32.48.0",
     "tailwindcss": "3.0.24"
   }
 }
