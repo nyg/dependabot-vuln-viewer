@@ -42,10 +42,13 @@ npm run dev # localhost:3000
 
 ## Improvements
 
+* Check graphql query in GHE for "state"
+* Store settings in `localStorage`
 * Fix duplicate vuln issue after search/load more
 * Add OAuth login, GitHub Enterprise
-* Store settings in `localStorage`
-* Check graphql query in GHE for "state"
+* Show "loading" when pressing enter
+* Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>.
+
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
