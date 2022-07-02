@@ -1,36 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "packageRules": [
-    {
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "schedule": [
-        "after 5am and before 11am every saturday"
-      ],
-      "groupName": "all stable non-major dependencies",
-      "groupSlug": "all-stable-minor-patch",
-      "stabilityDays": 3,
-      "automerge": true
-    }
+  "extends": [
+    "github>nyg/renovate-presets"
   ],
-  "branchPrefix": "renovate-",
-  "dependencyDashboard": true,
-  "ignorePaths": [],
-  "internalChecksFilter": "strict",
-  "prCreation": "immediate",
-  "rangeStrategy": "pin",
-  "separateMultipleMajor": true,
-  "stabilityDays": 3,
-  "timezone": "Europe/Zurich",
-  "vulnerabilityAlerts": {
-    "automerge": true,
-    "stabilityDays": 0
-  },
   "ignoreDeps": [
     "@apollo/client"
   ]
