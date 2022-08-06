@@ -32,11 +32,11 @@
     "react-marked-renderer": "1.1.2"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.7",
-    "eslint": "8.20.0",
+    "autoprefixer": "10.4.8",
+    "eslint": "8.21.0",
     "eslint-config-next": "12.2.3",
     "postcss": "8.4.14",
-    "renovate": "32.131.1",
-    "tailwindcss": "3.1.6"
+    "renovate": "32.141.0",
+    "tailwindcss": "3.1.7"
   }
 }
