@@ -1,7 +1,7 @@
 import { severityImportance } from '../utils/config'
 
 
-const defaultSearchResult = {
+const emptySearchQueryResult = {
    fetchedRepoCount: 0,
    vulnCount: 0,
    nodes: [],
@@ -9,23 +9,47 @@ const defaultSearchResult = {
    alertsDisabledRepos: []
 }
 
+const emptyVulnQueryResult = {
+   nodes: []
+}
+
+
+// Query is defined in the GraphQL schema and has multiple fields such as
+// `search', `repository', etc.
 export const Query = {
    fields: {
       search: {
-         keyArgs: ['query'],
-         // how to merge repositories of two search results
-         merge(existing = defaultSearchResult, incoming, { variables, readField }) {
+         keyArgs: false,
+
+         // Defines how an incoming SearchResultItemConnection (the return type
+         // of `search') should be merged with the one already existing in the
+         // cache.
+         merge(existing = emptySearchQueryResult, incoming, { variables: { vulnCount, lastRepo: loadMore }, readField }) {
+
+            console.debug(arguments)
+
+            const countVuln = repo =>
+               readField({ fieldName: 'vulnerabilityAlerts', args: { first: vulnCount }, from: repo }).totalCount
+
+            const highestVulnCountFirst = (repo, anotherRepo) =>
+               countVuln(anotherRepo) - countVuln(repo)
 
             if (incoming.alertsDisabledRepo) {
+               // Repositories with Dependabot alerts disabled are fetched
+               // asynchronously when receiving the GraphQL response (custom
+               // ApolloLink).
                const alertsDisabledRepos = existing.alertsDisabledRepos.concat(incoming.alertsDisabledRepo)
                return { ...existing, alertsDisabledRepos }
             }
 
-            const vulnCount = repoRef =>
-               readField({ fieldName: 'vulnerabilityAlerts', args: { first: variables.vulnCount }, from: repoRef }).totalCount
-
-            const highestVulnCountFirst = (repoRef, anotherRepoRef) =>
-               vulnCount(anotherRepoRef) - vulnCount(repoRef)
+            if (!loadMore) {
+               // As we have disabled keyArgs, `existing' will not be empty if
+               // some data exists in the cache, even when executing the
+               // useLazyQuery hook a second time (i.e. not through its loadMore
+               // function). So we manually clear the existing items so as to
+               // reset the search.
+               existing = emptySearchQueryResult
+            }
 
             return {
                ...incoming,
@@ -44,14 +68,23 @@ export const Repository = {
    fields: {
       vulnerabilityAlerts: {
          keyArgs: false,
-         // how to merge alerts of a repository
-         merge(existing = { nodes: [] }, incoming, { readField }) {
 
-            const severity = alertRef =>
-               readField('securityVulnerability', alertRef).severity
+         // Defines how to merge the vulnerabilityAlerts field of two identical
+         // Repository (one existing in the cache, one coming from the GraphQL
+         // response).
+         merge(existing = emptyVulnQueryResult, incoming, { readField, variables: { lastVuln: loadMore } }) {
 
-            const highestSeverityFirst = (alertRef, anotherAlertRef) =>
-               severityImportance[severity(anotherAlertRef)] - severityImportance[severity(alertRef)]
+            console.debug(arguments)
+
+            const severity = alert =>
+               readField('securityVulnerability', alert).severity
+
+            const highestSeverityFirst = (alert, anotherAlert) =>
+               severityImportance[severity(anotherAlert)] - severityImportance[severity(alert)]
+
+            if (!loadMore) {
+               existing = emptyVulnQueryResult
+            }
 
             return {
                ...incoming,

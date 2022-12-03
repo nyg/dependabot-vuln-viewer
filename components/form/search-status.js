@@ -30,13 +30,13 @@ export default function SearchStatus({ loading, error, data }) {
          : '.'
 
       return (
-         <p className='pl-3'>
+         <div className='pl-3'>
             Searched {fetchedRepoCount} of {totalRepoCount} repositories{hasMoreReposText}<br />
             Found {vulnRepoCount} with {vulnCount} vulnerabilities,{' '}
             <Tooltip enabled={inaccessibleCount} value={toTooltip(inaccessibleRepos)}>{inaccessibleCount} with insufficient access</Tooltip>,{' '}
             <Tooltip enabled={disabledCount} value={toTooltip(alertsDisabledRepos)}>{disabledCount} with alerts disabled</Tooltip>{' '}
             and {zeroVulnRepoCount} without vulnerabilities.
-         </p>
+         </div>
       )
    }
 

@@ -67,5 +67,5 @@ export const FETCH_REPO = gql`
 
 export const WRITE_ALERTS_DISABLED_REPO = gql`
    fragment WriteAlertsDisabledRepo on Query {
-      search(query: $query)
+      search
    }`
