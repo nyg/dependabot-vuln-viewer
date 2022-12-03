@@ -1,5 +1,5 @@
 import eventBus from '../../utils/event-bus'
-import { Fragment } from 'react/cjs/react.production.min'
+import { Fragment } from 'react'
 import Link from '../link'
 import Tooltip from '../tooltip'
 
