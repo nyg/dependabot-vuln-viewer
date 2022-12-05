@@ -4,9 +4,11 @@ import Link from '../link'
 import Tooltip from '../tooltip'
 
 
-const toTooltip = repos =>
-   repos.map(({ owner: { login: owner }, name, url, id }) =>
-      <Fragment key={id}><Link href={`${url}`}>{owner}/{name}</Link><br /></Fragment>)
+const repoToLink = ({ owner: { login: owner }, name, url, id }) =>
+   <Fragment key={id}><Link href={`${url}`}>{owner}/{name}</Link><br /></Fragment>
+
+const byOwnerAndName = ({ url }, { url: anotherUrl }) => url.localeCompare(anotherUrl)
+const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repoToLink)
 
 export default function SearchStatus({ loading, error, data }) {
 
@@ -32,7 +34,7 @@ export default function SearchStatus({ loading, error, data }) {
       return (
          <div className='pl-3'>
             Searched {fetchedRepoCount} of {totalRepoCount} repositories{hasMoreReposText}<br />
-            Found {vulnRepoCount} with {vulnCount} vulnerabilities,{' '}
+            Found {vulnRepoCount} repositories with {vulnCount} vulnerabilities,{' '}
             <Tooltip enabled={inaccessibleCount} value={toTooltip(inaccessibleRepos)}>{inaccessibleCount} with insufficient access</Tooltip>,{' '}
             <Tooltip enabled={disabledCount} value={toTooltip(alertsDisabledRepos)}>{disabledCount} with alerts disabled</Tooltip>{' '}
             and {zeroVulnRepoCount} without vulnerabilities.
