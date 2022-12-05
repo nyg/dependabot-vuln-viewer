@@ -11,13 +11,20 @@ const groupByRepoType = (map, repo) => {
    return map
 }
 
-// TODO refactor ghe url
-const fetchDependabotStatus = (repo, { uri, headers }) => ({
-   repo,
-   promise: fetch(`${uri.replace(/\/graphql/, '')}/repos/${repo.owner.login}/${repo.name}/vulnerability-alerts`, {
-      method: 'HEAD', headers
-   })
-})
+const toRestUrl = graphQlUrl => {
+   const isGHE = !graphQlUrl.includes('https://api.github.com')
+   const restPath = isGHE ? '/v3' : ''
+   return graphQlUrl.replace(/\/graphql/, restPath)
+}
+
+const fetchDependabotStatus = (repo, { uri: graphQlUrl, headers }) => {
+   const restUrl = `${toRestUrl(graphQlUrl)}/repos/${repo.owner.login}/${repo.name}/vulnerability-alerts`
+   const requestOptions = { method: 'HEAD', headers }
+   return {
+      repo,
+      promise: fetch(restUrl, requestOptions)
+   }
+}
 
 const writeRepoToCache = alertsDisabledRepo => {
    apolloClient.writeFragment({
