@@ -50,7 +50,7 @@ const handleSearchReposResponse = (operation, response) => {
       // store inaccessible repos in a separate field
       response.data.search.inaccessibleRepos = repoMap.inaccessible
 
-      // count the total number of vulnerabilities accros vulnerable repos
+      // count the total number of vulnerabilities across vulnerable repos
       response.data.search.vulnCount = response.data.search.repos.reduce(sumVulnCount, 0)
 
       // a repo with no vulnerabilities might actually have dependabot alerts
