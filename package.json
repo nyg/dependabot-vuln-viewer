@@ -22,7 +22,7 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@apollo/client": "3.10.1",
+    "@apollo/client": "3.10.4",
     "github-markdown-css": "5.5.1",
     "graphql": "16.8.1",
     "next": "14.2.3",
