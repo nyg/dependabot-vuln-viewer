@@ -1,21 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility has-tooltip {
+  &:hover .tooltip {
+    @apply block;
+  }
+
+  &:hover .tooltip:before {
+    @apply absolute content-[''] top-1 border-x-transparent border-y-gray-800 border-x-8 border-b-8 left-1/2 -translate-x-1/2;
+  }
+}
+
+@utility tooltip {
+  .has-tooltip:hover & {
+    @apply block;
+  }
+
+  .has-tooltip:hover &:before {
+    @apply absolute content-[''] top-1 border-x-transparent border-y-gray-800 border-x-8 border-b-8 left-1/2 -translate-x-1/2;
+  }
+}
 
 @layer base {
 
     th {
-        @apply font-light py-0 !important
-    }
-}
-
-@layer components {
-
-    .has-tooltip:hover .tooltip {
-        @apply block
-    }
-
-    .has-tooltip:hover .tooltip:before {
-        @apply absolute content-[''] top-1 border-x-transparent border-y-gray-800 border-x-8 border-b-8 left-1/2 -translate-x-1/2
+        @apply font-light! py-0!
     }
 }
