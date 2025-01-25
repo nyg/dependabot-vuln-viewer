@@ -32,8 +32,8 @@ export default function SearchForm() {
          </div>
 
          <div className='flex items-end gap-x-3'>
-            <Input className='flex-grow' name='query' label='Repositories' defaultValue={process.env.NEXT_PUBLIC_REPOS} />
-            <button className='px-2 py-1 bg-gray-600 text-gray-100 rounded hover:bg-gray-500'>Search</button>
+            <Input className='grow' name='query' label='Repositories' defaultValue={process.env.NEXT_PUBLIC_REPOS} />
+            <button className='px-2 py-1 bg-gray-600 text-gray-100 rounded-sm hover:bg-gray-500'>Search</button>
          </div>
       </form>
    )

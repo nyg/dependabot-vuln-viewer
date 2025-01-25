@@ -8,7 +8,7 @@ export default function Input({ name, type = 'text', defaultValue, label, classN
             className='px-3 pb-1 text-xs text-gray-800 col-span-full'
             htmlFor={name}>{label}</label>
          <input
-            className='px-3 py-1 outline-none bg-gray-200 rounded grow'
+            className='px-3 py-1 outline-hidden bg-gray-200 rounded-sm grow'
             size={1} type={type} id={name} name={name} defaultValue={defaultValue} autoComplete={autoComplete} />
       </div>
    )
