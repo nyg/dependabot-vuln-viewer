@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Next.js: server-side",
+            "port": 9230,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "sourceMapPathOverrides": {
+                "/turbopack/[project]/*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "Next.js: client-side",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMapPathOverrides": {
+                "/turbopack/[project]/*": "${webRoot}/*"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Next.js: full stack",
+            "configurations": [
+                "Next.js: client-side",
+                "Next.js: server-side"
+            ],
+            "stopAll": true
+        }
+    ]
+}

@@ -19,7 +19,7 @@
     "url": "https://github.com/nyg/dependabot-vuln-viewer/issues"
   },
   "scripts": {
-    "dev": "next dev"
+    "dev": "NODE_OPTIONS='--inspect' next dev --turbo"
   },
   "dependencies": {
     "@apollo/client": "3.12.4",
