@@ -4,7 +4,7 @@ import eventBus from '../../utils/event-bus'
 import Repository from '../table/repository'
 import SearchStatus from './search-status'
 import { useEffect } from 'react'
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from "@apollo/client/react";
 
 
 export default function SearchResults() {

@@ -8,7 +8,10 @@ const repoToLink = ({ owner: { login: owner }, name, url, id }) =>
    <Fragment key={id}><Link href={`${url}`}>{owner}/{name}</Link><br /></Fragment>
 
 const byOwnerAndName = ({ url }, { url: anotherUrl }) => url.localeCompare(anotherUrl)
-const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repoToLink)
+const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repo => {
+   console.log(repo)
+   return repoToLink(repo)
+})
 
 export default function SearchStatus({ loading, error, data }) {
 

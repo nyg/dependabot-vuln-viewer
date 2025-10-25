@@ -29,7 +29,8 @@
     "marked-react": "3.0.1",
     "next": "15.4.7",
     "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react-dom": "19.1.1",
+    "rxjs": "7.8.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.11",

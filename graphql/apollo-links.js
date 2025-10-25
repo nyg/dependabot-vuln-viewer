@@ -2,6 +2,7 @@ import { isRepoAccessible, isRepoVulnerable, sumVulnCount } from '../utils/confi
 import apolloClient from './apollo'
 import { ApolloLink } from '@apollo/client'
 import { WRITE_ALERTS_DISABLED_REPO } from './queries'
+import { map } from 'rxjs'
 
 
 const groupByRepoType = (map, repo) => {
@@ -81,5 +82,6 @@ const getHandler = (operation, response) => {
 // Define a custom ApolloLink to be able to modify the response received from
 // the GraphQL server.
 export default new ApolloLink((operation, forward) => {
-   return forward(operation).map(response => getHandler(operation, response))
+   // return forward(operation).map(response => getHandler(operation, response))
+   return forward(operation).pipe(map(response => getHandler(operation, response)))
 })

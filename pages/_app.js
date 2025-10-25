@@ -1,5 +1,5 @@
 import '../styles/global.css'
-import { ApolloProvider } from '@apollo/client'
+import { ApolloProvider } from "@apollo/client/react";
 import client from '../graphql/apollo'
 import React from 'react'
 
