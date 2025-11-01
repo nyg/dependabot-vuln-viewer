@@ -22,7 +22,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev --turbo"
   },
   "dependencies": {
-    "@apollo/client": "3.14.0",
+    "@apollo/client": "4.0.8",
     "@babel/runtime": "7.28.4",
     "github-markdown-css": "5.8.1",
     "graphql": "16.11.0",
