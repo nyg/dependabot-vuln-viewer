@@ -37,6 +37,11 @@ const writeRepoToCache = alertsDisabledRepo => {
 
 const handleSearchReposResponse = (operation, response) => {
 
+   console.log('operation')
+   console.log(operation)
+   console.log('response')
+   console.log(response)
+
    if (response.data) {
 
       const repoMap = { vulnerable: [], nonVulnerable: [], inaccessible: [] }

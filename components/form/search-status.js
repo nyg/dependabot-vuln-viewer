@@ -9,21 +9,27 @@ const repoToLink = ({ owner: { login: owner }, name, url, id }) =>
 
 const byOwnerAndName = ({ url }, { url: anotherUrl }) => url.localeCompare(anotherUrl)
 const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repo => {
-   console.log(repo)
    return repoToLink(repo)
 })
 
 export default function SearchStatus({ loading, error, data }) {
+
+   // console.log('loading')
+   // console.log(loading)
+   // console.log('error')
+   // console.log(error)
+   // console.log('data')
+   // console.log(data)
 
    if (loading) return <p className='pl-3 italic'>Loading…<br />&nbsp;</p>
    if (error) return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
 
    if (data) {
 
-      console.log(data)
-
       const { totalRepoCount, fetchedRepoCount, inaccessibleRepos, alertsDisabledRepos, vulnCount } = data.search
       const { hasMoreRepos, lastRepo } = data.search.pageInfo
+
+      // console.log(inaccessibleRepos)
 
       const vulnRepoCount = data.search.repos.length
       const inaccessibleCount = inaccessibleRepos.length
