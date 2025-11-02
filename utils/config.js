@@ -11,7 +11,6 @@ export const packageLink = (ecosystem, name) => {
    }
 }
 
-
 export const severityColor = {
    LOW: { text: 'text-yellow-400', border: 'border-yellow-400' },
    MODERATE: { text: 'text-orange-400', border: 'border-orange-400' },
@@ -22,17 +21,6 @@ export const severityColor = {
 export const severityImportance = {
    LOW: 1, MODERATE: 2, HIGH: 3, CRITICAL: 4
 }
-
-
-export const isRepoAccessible = repo =>
-   repo.viewerPermission == 'ADMIN'
-
-export const isRepoVulnerable = repo =>
-   repo.alerts.totalCount > 0
-
-export const sumVulnCount = (sum, repo) =>
-   sum + repo.alerts.totalCount
-
 
 export const cveFirstThenGhsa = ({ type }, { anotherType }) =>
    type.localeCompare(anotherType)

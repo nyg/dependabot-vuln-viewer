@@ -32,13 +32,34 @@ export const Query = {
             const highestVulnCountFirst = (repo, anotherRepo) =>
                countVuln(anotherRepo) - countVuln(repo)
 
-            if (incoming.alertsDisabledRepo) {
-               // Repositories with Dependabot alerts disabled are fetched
-               // asynchronously when receiving the GraphQL response (custom
-               // ApolloLink).
-               const alertsDisabledRepos = existing.alertsDisabledRepos.concat(incoming.alertsDisabledRepo ?? [])
-               return { ...existing, alertsDisabledRepos }
-            }
+            const repoMap = incoming.nodes.reduce(
+               (map, repo) => {
+                  const isRepoAccessible = readField('viewerPermission', repo) === 'ADMIN'
+                  const areAlertsEnabled = readField('hasVulnerabilityAlertsEnabled', repo) === true
+                  const isRepoVulnerable = countVuln(repo)
+
+                  if (!isRepoAccessible) {
+                     map.inaccessible.push(repo)
+                  }
+                  else if (!areAlertsEnabled) {
+                     map.disabled.push(repo)
+                  }
+                  else if (isRepoVulnerable) {
+                     map.vulnerable.push(repo)
+                  }
+                  else {
+                     map.nonVulnerable.push(repo)
+                  }
+
+                  return map
+               },
+               { nonVulnerable: [], vulnerable: [], disabled: [], inaccessible: [] })
+
+            // keep track of how many repos were fetched, ignoring repo type
+            const fetchedRepoCount = incoming.nodes.length
+
+            const totalVulnCount = repoMap.vulnerable.reduce(
+               (sum, repo) => sum + countVuln(repo), 0)
 
             if (!loadMore) {
                // As we have disabled keyArgs, `existing' will not be empty if
@@ -49,14 +70,13 @@ export const Query = {
                existing = emptySearchQueryResult
             }
 
-            console.log(incoming)
             return {
                ...incoming,
-               nodes: existing.nodes.concat(incoming.nodes ?? []).sort(highestVulnCountFirst),
-               inaccessibleRepos: existing.inaccessibleRepos.concat(incoming.inaccessibleRepos ?? []),
-               alertsDisabledRepos: existing.alertsDisabledRepos,
-               fetchedRepoCount: existing.fetchedRepoCount + (incoming.fetchedRepoCount ?? 0),
-               vulnCount: existing.vulnCount + incoming.vulnCount,
+               nodes: existing.nodes.concat(repoMap.vulnerable).sort(highestVulnCountFirst),
+               inaccessibleRepos: existing.inaccessibleRepos.concat(repoMap.inaccessible),
+               alertsDisabledRepos: existing.alertsDisabledRepos.concat(repoMap.disabled),
+               fetchedRepoCount: existing.fetchedRepoCount + fetchedRepoCount,
+               vulnCount: existing.vulnCount + totalVulnCount,
             }
          }
       }
@@ -85,7 +105,7 @@ export const Repository = {
 
             return {
                ...incoming,
-               nodes: existing.nodes.concat(incoming.nodes ?? []).sort(highestSeverityFirst)
+               nodes: existing.nodes.concat(incoming.nodes).sort(highestSeverityFirst)
             }
          }
       }

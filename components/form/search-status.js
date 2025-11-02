@@ -8,9 +8,11 @@ const repoToLink = ({ owner: { login: owner }, name, url, id }) =>
    <Fragment key={id}><Link href={`${url}`}>{owner}/{name}</Link><br /></Fragment>
 
 const byOwnerAndName = ({ url }, { url: anotherUrl }) => url.localeCompare(anotherUrl)
-const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repo => {
-   return repoToLink(repo)
-})
+
+const toTooltip = repos =>
+   [...repos]
+      .sort(byOwnerAndName)
+      .map(repo => repoToLink(repo))
 
 export default function SearchStatus({ loading, error, data }) {
 
@@ -18,11 +20,8 @@ export default function SearchStatus({ loading, error, data }) {
    if (error) return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
 
    if (data) {
-
       const { totalRepoCount, fetchedRepoCount, inaccessibleRepos, alertsDisabledRepos, vulnCount } = data.search
       const { hasMoreRepos, lastRepo } = data.search.pageInfo
-
-      // console.log(data)
 
       const vulnRepoCount = data.search.repos.length
       const inaccessibleCount = inaccessibleRepos.length
