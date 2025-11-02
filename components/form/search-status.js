@@ -29,7 +29,7 @@ export default function SearchStatus({ loading, error, data }) {
       const { totalRepoCount, fetchedRepoCount, inaccessibleRepos, alertsDisabledRepos, vulnCount } = data.search
       const { hasMoreRepos, lastRepo } = data.search.pageInfo
 
-      // console.log(inaccessibleRepos)
+      // console.log(alertsDisabledRepos)
 
       const vulnRepoCount = data.search.repos.length
       const inaccessibleCount = inaccessibleRepos.length

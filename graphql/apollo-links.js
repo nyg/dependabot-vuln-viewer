@@ -28,6 +28,7 @@ const fetchDependabotStatus = (repo, { uri: graphQlUrl, headers }) => {
 }
 
 const writeRepoToCache = alertsDisabledRepo => {
+   console.log(alertsDisabledRepo)
    apolloClient.writeFragment({
       id: 'ROOT_QUERY',
       fragment: WRITE_ALERTS_DISABLED_REPO,
@@ -36,11 +37,6 @@ const writeRepoToCache = alertsDisabledRepo => {
 }
 
 const handleSearchReposResponse = (operation, response) => {
-
-   console.log('operation')
-   console.log(operation)
-   console.log('response')
-   console.log(response)
 
    if (response.data) {
 
@@ -64,11 +60,13 @@ const handleSearchReposResponse = (operation, response) => {
       // repos
       repoMap.nonVulnerable
          .map(repo => fetchDependabotStatus(repo, operation.getContext()))
-         .forEach(({ repo, promise }) => promise.then(response => {
-            if (response.status == 404) {
-               writeRepoToCache(repo)
-            }
-         }))
+         .forEach(({ repo, promise }) =>
+            promise.then(response => {
+               // console.log(repo)
+               if (response.status == 404) {
+                  writeRepoToCache(repo)
+               }
+            }))
    }
 
    return response
