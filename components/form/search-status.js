@@ -14,13 +14,6 @@ const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repo => {
 
 export default function SearchStatus({ loading, error, data }) {
 
-   // console.log('loading')
-   // console.log(loading)
-   // console.log('error')
-   // console.log(error)
-   // console.log('data')
-   // console.log(data)
-
    if (loading) return <p className='pl-3 italic'>Loading…<br />&nbsp;</p>
    if (error) return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
 
@@ -29,7 +22,7 @@ export default function SearchStatus({ loading, error, data }) {
       const { totalRepoCount, fetchedRepoCount, inaccessibleRepos, alertsDisabledRepos, vulnCount } = data.search
       const { hasMoreRepos, lastRepo } = data.search.pageInfo
 
-      // console.log(alertsDisabledRepos)
+      // console.log(data)
 
       const vulnRepoCount = data.search.repos.length
       const inaccessibleCount = inaccessibleRepos.length

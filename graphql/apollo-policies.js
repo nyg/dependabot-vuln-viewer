@@ -26,8 +26,6 @@ export const Query = {
          // cache.
          merge(existing = emptySearchQueryResult, incoming, { variables: { vulnCount, lastRepo: loadMore }, readField }) {
 
-            console.debug(arguments)
-
             const countVuln = repo =>
                readField({ fieldName: 'vulnerabilityAlerts', args: { first: vulnCount }, from: repo }).totalCount
 
@@ -38,7 +36,7 @@ export const Query = {
                // Repositories with Dependabot alerts disabled are fetched
                // asynchronously when receiving the GraphQL response (custom
                // ApolloLink).
-               const alertsDisabledRepos = existing.alertsDisabledRepos.concat(incoming.alertsDisabledRepo)
+               const alertsDisabledRepos = existing.alertsDisabledRepos.concat(incoming.alertsDisabledRepo ?? [])
                return { ...existing, alertsDisabledRepos }
             }
 
@@ -51,12 +49,13 @@ export const Query = {
                existing = emptySearchQueryResult
             }
 
+            console.log(incoming)
             return {
                ...incoming,
-               nodes: existing.nodes.concat(incoming.nodes).sort(highestVulnCountFirst),
-               inaccessibleRepos: existing.inaccessibleRepos.concat(incoming.inaccessibleRepos),
+               nodes: existing.nodes.concat(incoming.nodes ?? []).sort(highestVulnCountFirst),
+               inaccessibleRepos: existing.inaccessibleRepos.concat(incoming.inaccessibleRepos ?? []),
                alertsDisabledRepos: existing.alertsDisabledRepos,
-               fetchedRepoCount: existing.fetchedRepoCount + incoming.fetchedRepoCount,
+               fetchedRepoCount: existing.fetchedRepoCount + (incoming.fetchedRepoCount ?? 0),
                vulnCount: existing.vulnCount + incoming.vulnCount,
             }
          }
@@ -74,8 +73,6 @@ export const Repository = {
          // response).
          merge(existing = emptyVulnQueryResult, incoming, { readField, variables: { lastVuln: loadMore } }) {
 
-            console.debug(arguments)
-
             const severity = alert =>
                readField('securityVulnerability', alert).severity
 
@@ -88,7 +85,7 @@ export const Repository = {
 
             return {
                ...incoming,
-               nodes: existing.nodes.concat(incoming.nodes).sort(highestSeverityFirst)
+               nodes: existing.nodes.concat(incoming.nodes ?? []).sort(highestSeverityFirst)
             }
          }
       }
