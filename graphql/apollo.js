@@ -1,5 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache, ApolloLink } from '@apollo/client'
-import { LocalState } from "@apollo/client/local-state";
+import { LocalState } from '@apollo/client/local-state'
 import { Query, Repository } from './apollo-policies'
 import operationProcessingLink from './apollo-links'
 
