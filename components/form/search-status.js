@@ -20,6 +20,8 @@ export default function SearchStatus({ loading, error, data }) {
 
    if (data) {
 
+      console.log(data)
+
       const { totalRepoCount, fetchedRepoCount, inaccessibleRepos, alertsDisabledRepos, vulnCount } = data.search
       const { hasMoreRepos, lastRepo } = data.search.pageInfo
 
