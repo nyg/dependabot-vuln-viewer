@@ -41,7 +41,7 @@ export default function SearchForm() {
             {authenticated
                ? <div className='col-span-2 grid grid-cols-1 content-end'>
                   <span className='px-3 pb-1 text-xs text-gray-800'>Github API Token</span>
-                  <span className='px-3 py-1 text-xs text-green-700 bg-gray-200 rounded-sm'>✓ Authenticated via GitHub</span>
+                  <span className='px-3 py-1 text-xs text-green-700 bg-gray-200 rounded-sm'>✓ Authenticated via GitHub OAuth</span>
                </div>
                : <Input className='col-span-2' name='githubApiToken' label='Github API Token' defaultValue={process.env.NEXT_PUBLIC_API_TOKEN} type='password' />
             }
