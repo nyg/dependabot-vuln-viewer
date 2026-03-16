@@ -1,4 +1,4 @@
-import { parseCookies } from '../../../utils/auth'
+import { parseCookies } from '../../../utils/server'
 
 export default async function handler(req, res) {
    const { code, state } = req.query
@@ -41,10 +41,11 @@ export default async function handler(req, res) {
       return res.redirect(`/?error=${encodeURIComponent(tokenData.error_description || tokenData.error)}`)
    }
 
+   // Short-lived non-httpOnly cookie so the client can transfer the token to localStorage
    const token = tokenData.access_token
    res.setHeader('Set-Cookie', [
       'oauth_state=; Max-Age=0; Path=/; SameSite=Lax; Secure; HttpOnly',
-      `github_oauth_token=${encodeURIComponent(token)}; Path=/; SameSite=Lax; Secure; HttpOnly`
+      `github_oauth_token=${encodeURIComponent(token)}; Path=/; Max-Age=60; SameSite=Lax; Secure`
    ])
    res.redirect('/')
 }

@@ -16,30 +16,23 @@ export default function SearchResults() {
    })
 
    let settings
-   const searchRepos = ({ query, repoCount, vulnCount, uri, token, useProxy }) => {
-      const context = useProxy
-         ? { uri: '/api/graphql' }
-         : { uri, headers: authHeader(token) }
-      settings = { vulnCount, uri, token, useProxy }
+   const searchRepos = ({ query, repoCount, vulnCount, uri, token }) => {
+      settings = { vulnCount, uri, token }
       gqlSearchRepos({
          variables: { query, repoCount, vulnCount },
-         context
+         context: { uri, headers: authHeader(token) }
       })
    }
 
    const loadMoreRepos = variables =>
       fetchMore({ variables })
 
-   const loadMoreVulns = variables => {
-      const context = settings.useProxy
-         ? { uri: '/api/graphql' }
-         : { uri: settings.uri, headers: authHeader(settings.token) }
+   const loadMoreVulns = variables =>
       fetchMore({
          query: FETCH_REPO,
          variables: { ...variables, vulnCount: settings.vulnCount },
-         context
+         context: { uri: settings.uri, headers: authHeader(settings.token) }
       })
-   }
 
    useEffect(() => eventBus.on('search.form.submitted', searchRepos), [])
    useEffect(() => eventBus.on('load.more.repos.clicked', loadMoreRepos), [])

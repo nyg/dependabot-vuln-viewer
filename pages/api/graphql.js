@@ -1,25 +1,23 @@
-import { parseCookies } from '../../utils/auth'
+const DEFAULT_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.github.com/graphql'
 
 export default async function handler(req, res) {
    if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method not allowed' })
    }
 
-   const cookies = parseCookies(req.headers.cookie)
-   const token = cookies.github_oauth_token
-      ? decodeURIComponent(cookies.github_oauth_token)
-      : null
-
-   if (!token) {
-      return res.status(401).json({ error: 'Not authenticated' })
+   const auth = req.headers.authorization
+   if (!auth) {
+      return res.status(401).json({ error: 'Missing Authorization header' })
    }
 
+   const targetUrl = req.headers['x-github-url'] || DEFAULT_URL
+
    try {
-      const response = await fetch('https://api.github.com/graphql', {
+      const response = await fetch(targetUrl, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': auth
          },
          body: JSON.stringify(req.body)
       })
@@ -28,6 +26,6 @@ export default async function handler(req, res) {
       res.status(response.status).json(data)
    }
    catch {
-      res.status(502).json({ error: 'Failed to proxy request to GitHub API' })
+      res.status(502).json({ error: `Failed to proxy request to ${targetUrl}` })
    }
 }

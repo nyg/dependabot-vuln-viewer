@@ -1,5 +1,5 @@
-import { fetchAuthStatus } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
+import { getToken, isAuthenticated } from '../../utils/auth'
 import Input from './input'
 import { useEffect, useState } from 'react'
 
@@ -9,7 +9,7 @@ export default function SearchForm() {
    const [authenticated, setAuthenticated] = useState(false)
 
    useEffect(() => {
-      fetchAuthStatus().then(status => setAuthenticated(status.authenticated))
+      setAuthenticated(isAuthenticated())
    }, [])
 
    useEffect(() =>
@@ -20,13 +20,13 @@ export default function SearchForm() {
 
    const onSubmit = event => {
       event.preventDefault()
+      const token = authenticated ? getToken() : (event.target.githubApiToken?.value || '')
       eventBus.dispatch('search.form.submitted', {
          query: event.target.query.value,
          repoCount: parseInt(event.target.repoCount.value),
          vulnCount: parseInt(event.target.vulnCount.value),
          uri: event.target.githubApiUrl.value,
-         token: authenticated ? null : (event.target.githubApiToken?.value || ''),
-         useProxy: authenticated
+         token,
       })
    }
 
