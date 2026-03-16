@@ -19,7 +19,8 @@
       "url": "https://github.com/nyg/dependabot-vuln-viewer/issues"
    },
    "scripts": {
-      "dev": "NODE_OPTIONS='--inspect' next dev --turbo",
+      "dev": "next dev",
+      "debug": "NODE_OPTIONS='--inspect' next dev",
       "lint": "eslint . --fix"
    },
    "dependencies": {

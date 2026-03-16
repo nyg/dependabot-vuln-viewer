@@ -7,11 +7,9 @@ export const useAuthenticated = () => {
 
    useEffect(() => {
       setAuthenticated(isAuthenticated())
+      return eventBus.on('auth.state.changed', ({ authenticated }) =>
+         setAuthenticated(authenticated))
    }, [])
-
-   useEffect(() =>
-      eventBus.on('auth.state.changed', ({ authenticated }) =>
-         setAuthenticated(authenticated)), [])
 
    return authenticated
 }

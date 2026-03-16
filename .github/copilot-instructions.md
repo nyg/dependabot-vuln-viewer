@@ -4,13 +4,13 @@
 
 ```sh
 pnpm install
-pnpm run dev  # starts Next.js dev server on localhost:3000 with --inspect and --turbo
+pnpm run dev  # starts Next.js dev server on localhost:3000 with --inspect
 ```
 
-There are no test or lint scripts in `package.json`. ESLint is configured but must be run manually:
+ESLint is configured and can be run via:
 
 ```sh
-npx eslint .
+pnpm run lint  # runs eslint . --fix
 ```
 
 ## Architecture
