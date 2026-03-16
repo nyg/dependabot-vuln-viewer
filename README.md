@@ -46,8 +46,8 @@ To enable the "Login with GitHub" option:
    `<your-app-url>/api/auth/callback`.
 3. Configure the following environment variables:
    ```
-   GITHUB_CLIENT_ID=<your-client-id>
-   GITHUB_CLIENT_SECRET=<your-client-secret>
+   GITHUB_OAUTH_CLIENT_ID=<your-client-id>
+   GITHUB_OAUTH_CLIENT_SECRET=<your-client-secret>
    ```
 
 If these variables are not set, the OAuth option will not appear and the app
@@ -58,8 +58,8 @@ will work as before using only personal access tokens.
 ```sh
 git clone https://github.com/nyg/dependabot-vuln-viewer.git
 cd dependabot-vuln-viewer
-npm install
-npm run dev # localhost:3000
+pnpm install
+pnpm run dev # localhost:3000
 ```
 
 ## Improvements

@@ -1,20 +1,13 @@
 import eventBus from '../../utils/event-bus'
-import { getToken, isAuthenticated } from '../../utils/auth'
+import { getToken } from '../../utils/auth'
+import { useAuthenticated } from '../../utils/hooks'
 import Input from './input'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 
 export default function SearchForm() {
 
-   const [authenticated, setAuthenticated] = useState(false)
-
-   useEffect(() => {
-      setAuthenticated(isAuthenticated())
-   }, [])
-
-   useEffect(() =>
-      eventBus.on('auth.state.changed', ({ authenticated }) =>
-         setAuthenticated(authenticated)), [])
+   const authenticated = useAuthenticated()
 
    useEffect(() =>
       eventBus.on('menu.item.settings.clicked', () => {

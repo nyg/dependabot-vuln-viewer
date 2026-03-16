@@ -1,49 +1,47 @@
-import { parseCookies } from '../../../utils/server'
-
-const OAUTH_URL = process.env.GITHUB_OAUTH_URL || 'https://github.com'
-
 export default async function handler(req, res) {
    const { code, state } = req.query
+   const redirectError = msg => res.redirect(`/?error=${encodeURIComponent(msg)}`)
 
    if (!code) {
-      return res.redirect('/?error=missing_code')
+      return redirectError('missing_code')
    }
 
-   const cookies = parseCookies(req.headers.cookie)
-   if (!state || state !== cookies.oauth_state) {
-      return res.redirect('/?error=invalid_state')
+   if (!state || state !== req.cookies.oauth_state) {
+      return redirectError('invalid_state')
    }
 
    let tokenData
    try {
-      const tokenResponse = await fetch(`${OAUTH_URL}/login/oauth/access_token`, {
+      const tokenResponse = await fetch(`${process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL}/login/oauth/access_token`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
          },
          body: JSON.stringify({
-            client_id: process.env.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID,
+            client_id: process.env.GITHUB_OAUTH_CLIENT_ID,
             client_secret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
             code
          })
       })
 
       if (!tokenResponse.ok) {
-         return res.redirect(`/?error=${encodeURIComponent('Failed to exchange code for token')}`)
+         return redirectError('Failed to exchange code for token')
       }
 
       tokenData = await tokenResponse.json()
    }
    catch {
-      return res.redirect(`/?error=${encodeURIComponent('Failed to connect to GitHub')}`)
+      return redirectError('Failed to connect to GitHub')
    }
 
    if (tokenData.error) {
-      return res.redirect(`/?error=${encodeURIComponent(tokenData.error_description || tokenData.error)}`)
+      return redirectError(tokenData.error_description || tokenData.error)
    }
 
-   // Short-lived non-httpOnly cookie so the client can transfer the token to localStorage
+   // `github_oauth_token` is a short-lived non-httpOnly cookie so the client
+   // can transfer the token to localStorage to make request to GitHub GraphQL's
+   // API directly from the browser.
    const token = tokenData.access_token
    res.setHeader('Set-Cookie', [
       'oauth_state=; Max-Age=0; Path=/; SameSite=Lax; Secure; HttpOnly',

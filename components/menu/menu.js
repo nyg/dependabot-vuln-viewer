@@ -1,5 +1,6 @@
-import { clearToken, isAuthenticated } from '../../utils/auth'
+import { clearToken } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
+import { useAuthenticated } from '../../utils/hooks'
 import Link from '../link'
 import MenuItem from './menu-item'
 import { useEffect, useState } from 'react'
@@ -7,17 +8,12 @@ import { useEffect, useState } from 'react'
 
 export default function Menu() {
 
-   const [authenticated, setAuthenticated] = useState(false)
+   const authenticated = useAuthenticated()
    const [oauthConfigured, setOauthConfigured] = useState(false)
 
    useEffect(() => {
-      setAuthenticated(isAuthenticated())
-      setOauthConfigured(!!process.env.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID)
+      setOauthConfigured(!!process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL)
    }, [])
-
-   useEffect(() =>
-      eventBus.on('auth.state.changed', ({ authenticated }) =>
-         setAuthenticated(authenticated)), [])
 
    const logout = () => {
       clearToken()
