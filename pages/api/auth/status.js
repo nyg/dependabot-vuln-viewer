@@ -1,10 +1,4 @@
-function parseCookies(cookieHeader) {
-   return (cookieHeader || '').split(';').reduce((acc, cookie) => {
-      const [key, ...val] = cookie.trim().split('=')
-      acc[key] = val.join('=')
-      return acc
-   }, {})
-}
+import { parseCookies } from '../../../utils/auth'
 
 export default function handler(req, res) {
    const configured = !!process.env.GITHUB_CLIENT_ID

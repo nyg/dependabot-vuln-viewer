@@ -1,10 +1,4 @@
-function parseCookies(cookieHeader) {
-   return (cookieHeader || '').split(';').reduce((acc, cookie) => {
-      const [key, ...val] = cookie.trim().split('=')
-      acc[key] = val.join('=')
-      return acc
-   }, {})
-}
+import { parseCookies } from '../../../utils/auth'
 
 export default async function handler(req, res) {
    const { code, state } = req.query
