@@ -7,7 +7,8 @@ export default function handler(req, res) {
    }
 
    const state = randomBytes(16).toString('hex')
-   res.setHeader('Set-Cookie', `oauth_state=${state}; Path=/; HttpOnly; SameSite=Lax; Max-Age=600`)
+   const secure = process.env.NODE_ENV === 'production' ? '; Secure' : ''
+   res.setHeader('Set-Cookie', `oauth_state=${state}; Path=/; HttpOnly; SameSite=Lax; Max-Age=600${secure}`)
 
    const params = new URLSearchParams({
       client_id: clientId,
