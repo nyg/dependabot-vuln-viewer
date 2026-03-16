@@ -7,7 +7,9 @@ import { transferOAuthToken } from '../utils/auth'
 
 export default function MyApp({ Component, pageProps }) {
 
-   useEffect(() => { transferOAuthToken() }, [])
+   useEffect(() => {
+      transferOAuthToken()
+   }, [])
 
    return (
       <ApolloProvider client={client}>

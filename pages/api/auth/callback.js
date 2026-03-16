@@ -30,8 +30,7 @@ export default async function handler(req, res) {
       }
 
       tokenData = await tokenResponse.json()
-   }
-   catch {
+   } catch {
       return redirectError('Failed to connect to GitHub')
    }
 
