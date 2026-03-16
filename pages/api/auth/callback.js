@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
    // `github_oauth_token` is a short-lived non-httpOnly cookie so the client
    // can transfer the token to localStorage to make request to GitHub GraphQL's
-   // API directly from the browser.
+   // API directly from the browser. See transferOAuthToken() in auth.js.
    const token = tokenData.access_token
    res.setHeader('Set-Cookie', [
       'oauth_state=; Max-Age=0; Path=/; SameSite=Lax; Secure; HttpOnly',

@@ -59,13 +59,12 @@ will work as before using only personal access tokens.
 git clone https://github.com/nyg/dependabot-vuln-viewer.git
 cd dependabot-vuln-viewer
 pnpm install
-pnpm run dev # localhost:3000
+pnpm dev # localhost:3000
 ```
 
-## Improvements
+## Possible Improvements
 
 * Store settings in `localStorage`
-* GitHub Enterprise support
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
