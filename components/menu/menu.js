@@ -1,4 +1,4 @@
-import { clearOAuthToken, getOAuthToken, isGitHubOAuthConfigured } from '../../utils/auth'
+import { fetchAuthStatus } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
 import Link from '../link'
 import MenuItem from './menu-item'
@@ -7,24 +7,18 @@ import { useEffect, useState } from 'react'
 
 export default function Menu() {
 
-   const [oauthToken, setOauthToken] = useState(null)
+   const [authStatus, setAuthStatus] = useState({ configured: false, authenticated: false })
 
    useEffect(() => {
-      const token = getOAuthToken()
-      if (token) setOauthToken(token)
+      fetchAuthStatus().then(setAuthStatus)
    }, [])
-
-   const handleLogout = () => {
-      clearOAuthToken()
-      window.location.reload()
-   }
 
    return (
       <>
-         {isGitHubOAuthConfigured() && (
+         {authStatus.configured && (
             <MenuItem>
-               {oauthToken
-                  ? <span onClick={handleLogout}>Logout</span>
+               {authStatus.authenticated
+                  ? <a href='/api/auth/logout'>Logout</a>
                   : <a href='/api/auth/login'>Login with GitHub</a>}
             </MenuItem>
          )}

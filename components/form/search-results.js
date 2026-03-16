@@ -16,11 +16,14 @@ export default function SearchResults() {
    })
 
    let settings
-   const searchRepos = ({ query, repoCount, vulnCount, uri, token }) => {
-      settings = { vulnCount, uri, token }
+   const searchRepos = ({ query, repoCount, vulnCount, uri, token, useProxy }) => {
+      const context = useProxy
+         ? { uri: '/api/graphql' }
+         : { uri, headers: authHeader(token) }
+      settings = { vulnCount, uri, token, useProxy }
       gqlSearchRepos({
          variables: { query, repoCount, vulnCount },
-         context: { uri, headers: authHeader(token) }
+         context
       })
    }
 
@@ -28,10 +31,13 @@ export default function SearchResults() {
       fetchMore({ variables })
 
    const loadMoreVulns = variables => {
+      const context = settings.useProxy
+         ? { uri: '/api/graphql' }
+         : { uri: settings.uri, headers: authHeader(settings.token) }
       fetchMore({
          query: FETCH_REPO,
          variables: { ...variables, vulnCount: settings.vulnCount },
-         context: { uri: settings.uri, headers: authHeader(settings.token) }
+         context
       })
    }
 

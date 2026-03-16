@@ -1,4 +1,4 @@
-import { getOAuthToken } from '../../utils/auth'
+import { fetchAuthStatus } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
 import Input from './input'
 import { useEffect, useState } from 'react'
@@ -6,11 +6,10 @@ import { useEffect, useState } from 'react'
 
 export default function SearchForm() {
 
-   const [oauthToken, setOauthToken] = useState(null)
+   const [authenticated, setAuthenticated] = useState(false)
 
    useEffect(() => {
-      const token = getOAuthToken()
-      if (token) setOauthToken(token)
+      fetchAuthStatus().then(status => setAuthenticated(status.authenticated))
    }, [])
 
    useEffect(() =>
@@ -26,7 +25,8 @@ export default function SearchForm() {
          repoCount: parseInt(event.target.repoCount.value),
          vulnCount: parseInt(event.target.vulnCount.value),
          uri: event.target.githubApiUrl.value,
-         token: oauthToken || event.target.githubApiToken?.value || ''
+         token: authenticated ? null : (event.target.githubApiToken?.value || ''),
+         useProxy: authenticated
       })
    }
 
@@ -34,7 +34,7 @@ export default function SearchForm() {
       <form method='post' onSubmit={onSubmit}>
          <div className='grid grid-cols-6 gap-x-3 mb-3' id='settings'>
             <Input className='col-span-2' name='githubApiUrl' label='Github API URL' defaultValue={process.env.NEXT_PUBLIC_API_URL} />
-            {oauthToken
+            {authenticated
                ? <div className='col-span-2 grid grid-cols-1'>
                   <span className='px-3 pb-1 text-xs text-gray-800'>Github API Token</span>
                   <span className='px-3 py-1 text-xs text-green-700 bg-gray-200 rounded-sm'>✓ Authenticated via GitHub</span>

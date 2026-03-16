@@ -46,7 +46,7 @@ To enable the "Login with GitHub" option:
    `<your-app-url>/api/auth/callback`.
 3. Configure the following environment variables:
    ```
-   NEXT_PUBLIC_GITHUB_CLIENT_ID=<your-client-id>
+   GITHUB_CLIENT_ID=<your-client-id>
    GITHUB_CLIENT_SECRET=<your-client-secret>
    ```
 

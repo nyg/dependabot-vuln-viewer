@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto'
 
 export default function handler(req, res) {
-   const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
+   const clientId = process.env.GITHUB_CLIENT_ID
    if (!clientId) {
       return res.status(500).json({ error: 'GitHub OAuth is not configured' })
    }

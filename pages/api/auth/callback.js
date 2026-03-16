@@ -27,7 +27,7 @@ export default async function handler(req, res) {
             'Accept': 'application/json'
          },
          body: JSON.stringify({
-            client_id: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
+            client_id: process.env.GITHUB_CLIENT_ID,
             client_secret: process.env.GITHUB_CLIENT_SECRET,
             code
          })
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
    const token = tokenData.access_token
    res.setHeader('Set-Cookie', [
       'oauth_state=; Max-Age=0; Path=/; SameSite=Lax; Secure; HttpOnly',
-      `github_oauth_token=${encodeURIComponent(token)}; Max-Age=60; Path=/; SameSite=Lax; Secure`
+      `github_oauth_token=${encodeURIComponent(token)}; Path=/; SameSite=Lax; Secure; HttpOnly`
    ])
    res.redirect('/')
 }
