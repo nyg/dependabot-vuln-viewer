@@ -6,11 +6,6 @@ function parseCookies(cookieHeader) {
    }, {})
 }
 
-function cookieFlags() {
-   const secure = process.env.NODE_ENV === 'production' ? '; Secure' : ''
-   return `; Path=/; SameSite=Lax${secure}`
-}
-
 export default async function handler(req, res) {
    const { code, state } = req.query
 
@@ -53,10 +48,9 @@ export default async function handler(req, res) {
    }
 
    const token = tokenData.access_token
-   const flags = cookieFlags()
    res.setHeader('Set-Cookie', [
-      `oauth_state=; Max-Age=0${flags}; HttpOnly`,
-      `github_oauth_token=${encodeURIComponent(token)}; Max-Age=60${flags}`
+      'oauth_state=; Max-Age=0; Path=/; SameSite=Lax; Secure; HttpOnly',
+      `github_oauth_token=${encodeURIComponent(token)}; Max-Age=60; Path=/; SameSite=Lax; Secure`
    ])
    res.redirect('/')
 }
