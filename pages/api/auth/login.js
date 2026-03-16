@@ -1,7 +1,9 @@
 import { randomBytes } from 'crypto'
 
+const OAUTH_URL = process.env.GITHUB_OAUTH_URL || 'https://github.com'
+
 export default function handler(req, res) {
-   const clientId = process.env.GITHUB_CLIENT_ID
+   const clientId = process.env.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID
    if (!clientId) {
       return res.status(500).json({ error: 'GitHub OAuth is not configured' })
    }
@@ -15,5 +17,5 @@ export default function handler(req, res) {
       state
    })
 
-   res.redirect(`https://github.com/login/oauth/authorize?${params}`)
+   res.redirect(`${OAUTH_URL}/login/oauth/authorize?${params}`)
 }

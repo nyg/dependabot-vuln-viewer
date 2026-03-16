@@ -12,8 +12,12 @@ export default function Menu() {
 
    useEffect(() => {
       setAuthenticated(isAuthenticated())
-      setOauthConfigured(!!process.env.NEXT_PUBLIC_OAUTH_CONFIGURED)
+      setOauthConfigured(!!process.env.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID)
    }, [])
+
+   useEffect(() =>
+      eventBus.on('auth.state.changed', ({ authenticated }) =>
+         setAuthenticated(authenticated)), [])
 
    const logout = () => {
       clearToken()

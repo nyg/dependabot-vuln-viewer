@@ -13,6 +13,10 @@ export default function SearchForm() {
    }, [])
 
    useEffect(() =>
+      eventBus.on('auth.state.changed', ({ authenticated }) =>
+         setAuthenticated(authenticated)), [])
+
+   useEffect(() =>
       eventBus.on('menu.item.settings.clicked', () => {
          const settings = document.getElementById('settings')
          settings.style.display = settings.style.display == 'none' ? 'grid' : 'none'
@@ -33,9 +37,9 @@ export default function SearchForm() {
    return (
       <form method='post' onSubmit={onSubmit}>
          <div className='grid grid-cols-6 gap-x-3 mb-3' id='settings'>
-            <Input className='col-span-2' name='githubApiUrl' label='Github API URL' defaultValue={process.env.NEXT_PUBLIC_API_URL} />
+            <Input className='col-span-2' name='githubApiUrl' label={authenticated ? 'Github API URL (locked to OAuth instance)' : 'Github API URL'} defaultValue={process.env.NEXT_PUBLIC_API_URL} disabled={authenticated} />
             {authenticated
-               ? <div className='col-span-2 grid grid-cols-1'>
+               ? <div className='col-span-2 grid grid-cols-1 content-end'>
                   <span className='px-3 pb-1 text-xs text-gray-800'>Github API Token</span>
                   <span className='px-3 py-1 text-xs text-green-700 bg-gray-200 rounded-sm'>✓ Authenticated via GitHub</span>
                </div>

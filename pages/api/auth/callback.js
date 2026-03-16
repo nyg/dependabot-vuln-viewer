@@ -1,5 +1,7 @@
 import { parseCookies } from '../../../utils/server'
 
+const OAUTH_URL = process.env.GITHUB_OAUTH_URL || 'https://github.com'
+
 export default async function handler(req, res) {
    const { code, state } = req.query
 
@@ -14,15 +16,15 @@ export default async function handler(req, res) {
 
    let tokenData
    try {
-      const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+      const tokenResponse = await fetch(`${OAUTH_URL}/login/oauth/access_token`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
          },
          body: JSON.stringify({
-            client_id: process.env.GITHUB_CLIENT_ID,
-            client_secret: process.env.GITHUB_CLIENT_SECRET,
+            client_id: process.env.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID,
+            client_secret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
             code
          })
       })

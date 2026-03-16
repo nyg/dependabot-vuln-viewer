@@ -1,5 +1,3 @@
-const DEFAULT_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.github.com/graphql'
-
 export default async function handler(req, res) {
    if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method not allowed' })
@@ -10,7 +8,10 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Missing Authorization header' })
    }
 
-   const targetUrl = req.headers['x-github-url'] || DEFAULT_URL
+   const targetUrl = req.headers['x-github-url']
+   if (!targetUrl) {
+      return res.status(400).json({ error: 'Missing X-GitHub-URL header' })
+   }
 
    try {
       const response = await fetch(targetUrl, {
