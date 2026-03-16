@@ -21,8 +21,7 @@ export default function Menu() {
 
    const logout = () => {
       clearToken()
-      setAuthenticated(false)
-      window.location.href = '/api/auth/logout'
+      eventBus.dispatch('auth.state.changed', { authenticated: false })
    }
 
    return (

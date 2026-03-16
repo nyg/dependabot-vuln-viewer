@@ -23,6 +23,7 @@ export const isAuthenticated = () => !!getToken()
 // Picks up the short-lived transfer cookie set by the OAuth callback,
 // saves the token to localStorage, and deletes the cookie.
 export const transferOAuthToken = () => {
+   console.log('transfering token')
    if (typeof document === 'undefined') return false
    const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${COOKIE_NAME}=([^;]+)`))
    if (!match) return false
