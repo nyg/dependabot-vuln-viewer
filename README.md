@@ -25,11 +25,33 @@ Can be any valid [advanced search][] query string:
 * [etc.][],
 * any combination of the above.
 
-### Personal Access Token
+### Authentication
 
-See [here][] to create a personal access token for the GitHub API. Only the
-`repo` [scope][] is needed, or `public_repo` if you don't care about private
-repositories.
+Two authentication methods are available (mutually exclusive):
+
+1. **GitHub OAuth Login** (recommended): Click "Login with GitHub" in the top
+   menu to authenticate via your GitHub account. Requires configuring a [GitHub
+   OAuth App][oauth-app] (see below).
+
+2. **Personal Access Token**: Enter a [personal access token][here] directly in
+   the settings. Only the `repo` [scope][] is needed, or `public_repo` if you
+   don't care about private repositories.
+
+### GitHub OAuth Setup
+
+To enable the "Login with GitHub" option:
+
+1. [Create a GitHub OAuth App][oauth-app] in your GitHub settings.
+2. Set the **Authorization callback URL** to
+   `<your-app-url>/api/auth/callback`.
+3. Configure the following environment variables:
+   ```
+   NEXT_PUBLIC_GITHUB_CLIENT_ID=<your-client-id>
+   GITHUB_CLIENT_SECRET=<your-client-secret>
+   ```
+
+If these variables are not set, the OAuth option will not appear and the app
+will work as before using only personal access tokens.
 
 ## Install & Run
 
@@ -43,10 +65,11 @@ npm run dev # localhost:3000
 ## Improvements
 
 * Store settings in `localStorage`
-* Add OAuth login, GitHub Enterprise
+* GitHub Enterprise support
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
 [etc.]: https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax
 [here]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 [scope]: https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps
+[oauth-app]: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app
