@@ -18,6 +18,10 @@
   }
 }
 
+@utility btn-reset {
+  @apply bg-transparent border-none p-0 font-[inherit] text-[inherit] cursor-pointer hover:underline;
+}
+
 @utility has-tooltip {
   &:hover .tooltip {
     @apply block;

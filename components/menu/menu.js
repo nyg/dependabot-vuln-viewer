@@ -25,11 +25,11 @@ export default function Menu() {
          {oauthConfigured && (
             <MenuItem>
                {authenticated
-                  ? <span onClick={logout} className='cursor-pointer'>Logout</span>
+                  ? <button type='button' onClick={logout} className='btn-reset'>Logout</button>
                   : <a href='/api/auth/login'>Login with GitHub</a>}
             </MenuItem>
          )}
-         <MenuItem><span onClick={() => eventBus.dispatch('menu.item.settings.clicked')}>Settings</span></MenuItem>
+         <MenuItem><button type='button' onClick={() => eventBus.dispatch('menu.item.settings.clicked')} className='btn-reset'>Settings</button></MenuItem>
          <MenuItem><Link href='https://github.com/nyg/dependabot-vuln-viewer'>GitHub</Link></MenuItem>
       </>
    )
