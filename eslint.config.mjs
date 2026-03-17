@@ -12,6 +12,7 @@ const eslintConfig = defineConfig([
          curly: ['error', 'all'],
          'brace-style': ['error', '1tbs'],
          'no-trailing-spaces': 'error',
+         'sort-imports': ['error', { ignoreCase: true, allowSeparatedGroups: true }],
       }
    },
    globalIgnores([
