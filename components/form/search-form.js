@@ -1,4 +1,6 @@
+import { loadSettings, saveSettings } from '../../utils/settings'
 import { useEffect, useState } from 'react'
+
 import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
 import Input from './input'
@@ -24,6 +26,18 @@ export default function SearchForm() {
       }
    }, [])
 
+   useEffect(() => {
+      const settings = loadSettings()
+      if (settings) {
+         for (const [key, value] of Object.entries(settings)) {
+            const el = document.getElementById(key)
+            if (el && !el.disabled) {
+               el.value = value
+            }
+         }
+      }
+   }, [])
+
    useEffect(() =>
       eventBus.on('menu.item.settings.clicked', () => {
          const settings = document.getElementById('settings')
@@ -33,6 +47,13 @@ export default function SearchForm() {
    const onSubmit = event => {
       event.preventDefault()
       const token = authenticated ? getToken() : (event.target.githubApiToken?.value || '')
+      saveSettings({
+         query: event.target.query.value,
+         githubApiUrl: event.target.githubApiUrl.value,
+         githubApiToken: event.target.githubApiToken?.value || '',
+         repoCount: event.target.repoCount.value,
+         vulnCount: event.target.vulnCount.value,
+      })
       eventBus.dispatch('search.form.submitted', {
          query: event.target.query.value,
          repoCount: parseInt(event.target.repoCount.value),
