@@ -56,7 +56,7 @@ There is no Redux, Zustand, or React Context — state lives in Apollo Client's 
 
 ## Code Style
 
-Enforced via ESLint (`.eslintrc.json`):
+Enforced via ESLint (`eslint.config.mjs`):
 
 - **3-space indentation**
 - **No semicolons**
