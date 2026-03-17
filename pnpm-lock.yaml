@@ -21,8 +21,8 @@ importers:
         specifier: 16.13.0
         version: 16.13.0
       marked-react:
-        specifier: 3.0.2
-        version: 3.0.2(react@19.2.4)
+        specifier: 4.0.0
+        version: 4.0.0(react@19.2.4)
       next:
         specifier: 16.1.7
         version: 16.1.7(@babel/core@7.28.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1144,6 +1144,9 @@ packages:
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
 
+  html-entities@2.6.0:
+    resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
+
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
@@ -1420,13 +1423,13 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
-  marked-react@3.0.2:
-    resolution: {integrity: sha512-uLuH5P5i1H+igH+Y7toWX+sM2UGDdYMIPZ9JtBNajkyFiQBoAMJJY7gBlm3nHXHiPDZHkhZ9p/cb9XO0F1qnCA==}
+  marked-react@4.0.0:
+    resolution: {integrity: sha512-+Kp1FSK0gT6q6uKjXvwaIigj++BkyKFxiQlrhDTu10H/awBvs1K4K1Uenu/6N7Ci4u0FxYtFuZxtgAZkW6w8gg==}
     peerDependencies:
       react: ^16.8.0 || >=17.0.0
 
-  marked@16.1.1:
-    resolution: {integrity: sha512-ij/2lXfCRT71L6u0M29tJPhP0bM5shLL3u5BePhFwPELj2blMJ6GDtD7PfJhRLhJ/c2UwrK17ySVcDzy2YHjHQ==}
+  marked@17.0.4:
+    resolution: {integrity: sha512-NOmVMM+KAokHMvjWmC5N/ZOvgmSWuqJB8FoYI019j4ogb/PeRMKoKIjReZ2w3376kkA8dSJIP8uD993Kxc0iRQ==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -3103,6 +3106,8 @@ snapshots:
     dependencies:
       hermes-estree: 0.25.1
 
+  html-entities@2.6.0: {}
+
   ignore@5.3.2: {}
 
   ignore@7.0.5: {}
@@ -3347,12 +3352,13 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  marked-react@3.0.2(react@19.2.4):
+  marked-react@4.0.0(react@19.2.4):
     dependencies:
-      marked: 16.1.1
+      html-entities: 2.6.0
+      marked: 17.0.4
       react: 19.2.4
 
-  marked@16.1.1: {}
+  marked@17.0.4: {}
 
   math-intrinsics@1.1.0: {}
 
