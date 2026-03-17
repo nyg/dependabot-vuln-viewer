@@ -4,7 +4,8 @@
 
 ```sh
 pnpm install
-pnpm run dev  # starts Next.js dev server on localhost:3000 with --inspect
+pnpm run dev    # starts Next.js dev server on localhost:3000
+pnpm run debug  # starts Next.js dev server with --inspect for debugging
 ```
 
 ESLint is configured and can be run via:
