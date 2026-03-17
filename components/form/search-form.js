@@ -2,12 +2,24 @@ import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
 import { useAuthenticated } from '../../utils/hooks'
 import Input from './input'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 
 export default function SearchForm() {
 
    const authenticated = useAuthenticated()
+   const [error, setError] = useState(null)
+
+   useEffect(() => {
+      const params = new URLSearchParams(window.location.search)
+      const errorParam = params.get('error')
+      if (errorParam) {
+         setError(errorParam)
+         params.delete('error')
+         const newUrl = params.size ? `${window.location.pathname}?${params}` : window.location.pathname
+         history.replaceState(null, '', newUrl)
+      }
+   }, [])
 
    useEffect(() =>
       eventBus.on('menu.item.settings.clicked', () => {
@@ -29,6 +41,12 @@ export default function SearchForm() {
 
    return (
       <form method='post' onSubmit={onSubmit}>
+         {error && (
+            <div className='flex items-center justify-between mb-3 px-3 py-2 text-xs text-red-800 bg-red-100 rounded-sm'>
+               <span>Authentication error: {error}</span>
+               <button type='button' onClick={() => setError(null)} className='btn-reset text-red-400 hover:text-red-600'>✕</button>
+            </div>
+         )}
          <div className='grid grid-cols-6 gap-x-3 mb-3' id='settings'>
             <Input className='col-span-2' name='githubApiUrl' label={authenticated ? 'GitHub API URL (linked to OAuth instance)' : 'GitHub API URL'} defaultValue={process.env.NEXT_PUBLIC_API_URL} disabled={authenticated} />
             {authenticated
