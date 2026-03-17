@@ -35,7 +35,22 @@ Two authentication methods are available (mutually exclusive):
 
 2. **Personal Access Token**: Enter a [personal access token][here] directly in
    the settings. Only the `repo` [scope][] is needed, or `public_repo` if you
-   don't care about private repositories.
+   don't care about private repositories. Search settings are saved in browser
+   `localStorage`, including the PAT, until you replace or clear them.
+
+### Saved Settings
+
+The app saves the search form values in browser `localStorage` and restores
+them when you reload the page. This includes:
+
+* the repository query
+* the GitHub API URL
+* the GitHub API token / PAT
+* repos per request
+* vulnerabilities per request
+
+If you use the app on a shared machine, clear browser storage or remove the PAT
+from settings before you leave the device.
 
 ### GitHub OAuth Setup
 
@@ -64,10 +79,6 @@ cd dependabot-vuln-viewer
 pnpm install
 pnpm dev # localhost:3000
 ```
-
-## Possible Improvements
-
-* Store settings in `localStorage`
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
 [Advanced Search]: https://github.com/search/advanced
