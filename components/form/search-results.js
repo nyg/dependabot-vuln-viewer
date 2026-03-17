@@ -27,13 +27,12 @@ export default function SearchResults() {
    const loadMoreRepos = variables =>
       fetchMore({ variables })
 
-   const loadMoreVulns = variables => {
+   const loadMoreVulns = variables =>
       fetchMore({
          query: FETCH_REPO,
          variables: { ...variables, vulnCount: settings.vulnCount },
          context: { uri: settings.uri, headers: authHeader(settings.token) }
       })
-   }
 
    useEffect(() => eventBus.on('search.form.submitted', searchRepos), [])
    useEffect(() => eventBus.on('load.more.repos.clicked', loadMoreRepos), [])

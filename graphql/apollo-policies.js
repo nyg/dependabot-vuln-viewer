@@ -40,14 +40,11 @@ export const Query = {
 
                   if (!isRepoAccessible) {
                      map.inaccessible.push(repo)
-                  }
-                  else if (!areAlertsEnabled) {
+                  } else if (!areAlertsEnabled) {
                      map.disabled.push(repo)
-                  }
-                  else if (isRepoVulnerable) {
+                  } else if (isRepoVulnerable) {
                      map.vulnerable.push(repo)
-                  }
-                  else {
+                  } else {
                      map.nonVulnerable.push(repo)
                   }
 

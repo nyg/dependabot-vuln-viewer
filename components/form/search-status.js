@@ -12,8 +12,12 @@ const toTooltip = repos => [...repos].sort(byOwnerAndName).map(repoToLink)
 
 export default function SearchStatus({ loading, error, data }) {
 
-   if (loading) return <p className='pl-3 italic'>Loading…<br />&nbsp;</p>
-   if (error) return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
+   if (loading) {
+      return <p className='pl-3 italic'>Loading…<br />&nbsp;</p>
+   }
+   if (error) {
+      return <p className='pl-3 text-red-600 font-semibold'>{error.message}</p>
+   }
 
    if (data) {
 
