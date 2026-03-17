@@ -2,7 +2,6 @@ import { clearToken } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
 import Link from '../link'
 import MenuItem from './menu-item'
-import NextLink from 'next/link'
 import { useAuthenticated } from '../../utils/hooks'
 
 
@@ -22,7 +21,8 @@ export default function Menu() {
             <MenuItem>
                {authenticated
                   ? <button type='button' onClick={logout} className='btn-reset'>Logout</button>
-                  : <NextLink href='/api/auth/login'>Login with GitHub</NextLink>}
+                  // eslint-disable-next-line @next/next/no-html-link-for-pages -- API route, not a page
+                  : <a href='/api/auth/login'>Login with GitHub</a>}
             </MenuItem>
          )}
          <MenuItem><button type='button' onClick={() => eventBus.dispatch('menu.item.settings.clicked')} className='btn-reset'>Settings</button></MenuItem>
