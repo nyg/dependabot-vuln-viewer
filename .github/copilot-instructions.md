@@ -27,6 +27,18 @@ Two mutually exclusive auth methods:
 
 The `oauth_state` cookie is a CSRF protection token: `login.js` generates a random value, stores it in an httpOnly cookie, and passes it as the `state` param to GitHub. `callback.js` validates the returned `state` matches the cookie before exchanging the code.
 
+### Local settings persistence
+
+Search form settings are persisted in `localStorage` via `utils/settings.js` and restored on app load. Persisted values include:
+
+- `query`
+- `githubApiUrl`
+- `githubApiToken`
+- `repoCount`
+- `vulnCount`
+
+This means a manually entered GitHub PAT remains in browser storage until the user replaces or clears it.
+
 ### Data flow
 
 1. User enters a search query and PAT in `SearchForm`

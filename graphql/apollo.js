@@ -1,4 +1,4 @@
-import { ApolloClient, HttpLink, InMemoryCache, ApolloLink } from '@apollo/client'
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client'
 import { LocalState } from '@apollo/client/local-state'
 import { Query, Repository } from './apollo-policies'
 
