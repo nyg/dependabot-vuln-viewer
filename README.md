@@ -48,7 +48,10 @@ To enable the "Login with GitHub" option:
    ```
    GITHUB_OAUTH_CLIENT_ID=<your-client-id>
    GITHUB_OAUTH_CLIENT_SECRET=<your-client-secret>
+   NEXT_PUBLIC_GITHUB_OAUTH_URL=<github-oauth-base-url>
    ```
+   where `<github-oauth-base-url>` is the base URL of the GitHub OAuth
+   endpoint (for example, `https://github.com/login/oauth`).
 
 If these variables are not set, the OAuth option will not appear and the app
 will work as before using only personal access tokens.
