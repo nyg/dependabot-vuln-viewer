@@ -1,20 +1,23 @@
+import { useEffect, useState } from 'react'
 import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
-import { useAuthenticated } from '../../utils/hooks'
 import Input from './input'
-import { useEffect, useState } from 'react'
+import { useAuthenticated } from '../../utils/hooks'
 
 
 export default function SearchForm() {
 
    const authenticated = useAuthenticated()
-   const [error, setError] = useState(null)
+   const [error, setError] = useState(() => {
+      if (typeof window === 'undefined') {
+         return null
+      }
+      return new URLSearchParams(window.location.search).get('error')
+   })
 
    useEffect(() => {
       const params = new URLSearchParams(window.location.search)
-      const errorParam = params.get('error')
-      if (errorParam) {
-         setError(errorParam)
+      if (params.has('error')) {
          params.delete('error')
          const newUrl = params.size ? `${window.location.pathname}?${params}` : window.location.pathname
          history.replaceState(null, '', newUrl)

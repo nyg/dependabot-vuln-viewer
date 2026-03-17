@@ -1,12 +1,11 @@
+import { useEffect, useState } from 'react'
 import eventBus from './event-bus'
 import { isAuthenticated } from './auth'
-import { useEffect, useState } from 'react'
 
 export const useAuthenticated = () => {
-   const [authenticated, setAuthenticated] = useState(false)
+   const [authenticated, setAuthenticated] = useState(() => isAuthenticated())
 
    useEffect(() => {
-      setAuthenticated(isAuthenticated())
       return eventBus.on('auth.state.changed', ({ authenticated }) =>
          setAuthenticated(authenticated))
    }, [])

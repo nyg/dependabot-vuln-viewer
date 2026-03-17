@@ -1,19 +1,15 @@
 import { clearToken } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
-import { useAuthenticated } from '../../utils/hooks'
 import Link from '../link'
 import MenuItem from './menu-item'
-import { useEffect, useState } from 'react'
+import NextLink from 'next/link'
+import { useAuthenticated } from '../../utils/hooks'
 
 
 export default function Menu() {
 
    const authenticated = useAuthenticated()
-   const [oauthConfigured, setOauthConfigured] = useState(false)
-
-   useEffect(() => {
-      setOauthConfigured(!!process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL)
-   }, [])
+   const oauthConfigured = !!process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL
 
    const logout = () => {
       clearToken()
@@ -26,7 +22,7 @@ export default function Menu() {
             <MenuItem>
                {authenticated
                   ? <button type='button' onClick={logout} className='btn-reset'>Logout</button>
-                  : <a href='/api/auth/login'>Login with GitHub</a>}
+                  : <NextLink href='/api/auth/login'>Login with GitHub</NextLink>}
             </MenuItem>
          )}
          <MenuItem><button type='button' onClick={() => eventBus.dispatch('menu.item.settings.clicked')} className='btn-reset'>Settings</button></MenuItem>
