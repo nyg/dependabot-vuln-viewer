@@ -1,13 +1,15 @@
 import { loadSettings, saveSettings } from '../../utils/settings'
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useEffect, useState } from 'react'
 
+import { useAuthenticated, useIsClient } from '../../utils/hooks'
 import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
 import Input from './input'
-import { useAuthenticated } from '../../utils/hooks'
 
 
-const subscribe = () => () => {}
+// Capture and clean the OAuth error parameter at module load.
+// On the server window is undefined so this is null; on the client
+// it reads (and removes) ?error= from the URL exactly once.
 const initialQueryError = typeof window === 'undefined'
    ? null
    : (() => {
@@ -26,7 +28,7 @@ const initialQueryError = typeof window === 'undefined'
 export default function SearchForm() {
 
    const authenticated = useAuthenticated()
-   const isClient = useSyncExternalStore(subscribe, () => true, () => false)
+   const isClient = useIsClient()
    const [errorDismissed, setErrorDismissed] = useState(false)
    const error = isClient ? initialQueryError : null
 
