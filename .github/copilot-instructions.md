@@ -57,7 +57,7 @@ Components communicate through a **custom event bus** built on native DOM `Custo
 - `load.more.vulns.clicked`
 - `auth.state.changed`
 
-There is no Redux, Zustand, or React Context — state lives in Apollo Client's cache and the event bus. Shared auth state is encapsulated in the `useAuthenticated()` custom hook (`utils/hooks.js`).
+There is no Redux, Zustand, or React Context — state lives in Apollo Client's cache and the event bus. Shared auth state is encapsulated in the `useAuthenticated()` custom hook (`utils/hooks.js`), which uses `useSyncExternalStore` so auth derived from `localStorage` stays SSR-safe and does not cause hydration mismatches.
 
 ### Apollo Client
 
@@ -88,3 +88,4 @@ Additional conventions:
 - `rxjs` is listed as a dependency but **not currently imported anywhere** in the source
 - `marked-react` renders vulnerability advisory descriptions as Markdown
 - `github-markdown-css` styles the rendered Markdown content
+- `package.json` uses `pnpm.overrides` to pin `baseline-browser-mapping` so `pnpm run lint` does not emit the stale-data warning from that transitive dependency

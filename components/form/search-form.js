@@ -1,27 +1,36 @@
 import { loadSettings, saveSettings } from '../../utils/settings'
 import { useEffect, useState } from 'react'
 
+import { useAuthenticated, useIsClient } from '../../utils/hooks'
 import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
 import Input from './input'
-import { useAuthenticated } from '../../utils/hooks'
 
 
-export default function SearchForm() {
-
-   const authenticated = useAuthenticated()
-   const [error, setError] = useState(null)
-
-   useEffect(() => {
+// Capture and clean the OAuth error parameter at module load.
+// On the server window is undefined so this is null; on the client
+// it reads (and removes) ?error= from the URL exactly once.
+const initialQueryError = typeof window === 'undefined'
+   ? null
+   : (() => {
       const params = new URLSearchParams(window.location.search)
-      const errorParam = params.get('error')
-      if (errorParam) {
-         setError(errorParam)
+      const error = params.get('error')
+
+      if (error) {
          params.delete('error')
          const newUrl = params.size ? `${window.location.pathname}?${params}` : window.location.pathname
          history.replaceState(null, '', newUrl)
       }
-   }, [])
+
+      return error
+   })()
+
+export default function SearchForm() {
+
+   const authenticated = useAuthenticated()
+   const isClient = useIsClient()
+   const [errorDismissed, setErrorDismissed] = useState(false)
+   const error = isClient ? initialQueryError : null
 
    useEffect(() => {
       const settings = loadSettings()
@@ -62,10 +71,10 @@ export default function SearchForm() {
 
    return (
       <form method='post' onSubmit={onSubmit}>
-         {error && (
+         {error && !errorDismissed && (
             <div className='flex items-center justify-between mb-3 px-3 py-2 text-xs text-red-800 bg-red-100 rounded-sm'>
                <span>Authentication error: {error}</span>
-               <button type='button' onClick={() => setError(null)} className='btn-reset text-red-400 hover:text-red-600'>✕</button>
+               <button type='button' onClick={() => setErrorDismissed(true)} className='btn-reset text-red-400 hover:text-red-600'>✕</button>
             </div>
          )}
          <div className='grid grid-cols-6 gap-x-3 mb-3' id='settings'>

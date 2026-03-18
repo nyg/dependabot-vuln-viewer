@@ -1,9 +1,9 @@
 import { FETCH_REPO, SEARCH_REPOS } from '../../graphql/queries'
+import { useEffect, useRef } from 'react'
 import { authHeader } from '../../utils/config'
 import eventBus from '../../utils/event-bus'
 import Repository from '../table/repository'
 import SearchStatus from './search-status'
-import { useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client/react'
 
 
@@ -15,9 +15,9 @@ export default function SearchResults() {
       nextFetchPolicy: 'network-only'
    })
 
-   let settings
+   const settingsRef = useRef(null)
    const searchRepos = ({ query, repoCount, vulnCount, uri, token }) => {
-      settings = { vulnCount, uri, token }
+      settingsRef.current = { vulnCount, uri, token }
       gqlSearchRepos({
          variables: { query, repoCount, vulnCount },
          context: { uri, headers: authHeader(token) }
@@ -30,8 +30,8 @@ export default function SearchResults() {
    const loadMoreVulns = variables =>
       fetchMore({
          query: FETCH_REPO,
-         variables: { ...variables, vulnCount: settings.vulnCount },
-         context: { uri: settings.uri, headers: authHeader(settings.token) }
+         variables: { ...variables, vulnCount: settingsRef.current.vulnCount },
+         context: { uri: settingsRef.current.uri, headers: authHeader(settingsRef.current.token) }
       })
 
    useEffect(() => eventBus.on('search.form.submitted', searchRepos), [])
