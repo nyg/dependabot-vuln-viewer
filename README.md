@@ -77,7 +77,8 @@ will work as before using only personal access tokens.
 git clone https://github.com/nyg/dependabot-vuln-viewer.git
 cd dependabot-vuln-viewer
 pnpm install
-pnpm dev # localhost:3000
+pnpm run dev   # localhost:3000
+pnpm run lint  # runs eslint . --fix
 ```
 
 [dependabot-vuln-viewer.vercel.app]: https://dependabot-vuln-viewer.vercel.app/
