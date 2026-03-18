@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react'
 import eventBus from './event-bus'
 import { isAuthenticated } from './auth'
+import { useSyncExternalStore } from 'react'
 
-export const useAuthenticated = () => {
-   const [authenticated, setAuthenticated] = useState(() => isAuthenticated())
+const subscribe = callback =>
+   eventBus.on('auth.state.changed', () => callback())
 
-   useEffect(() => {
-      return eventBus.on('auth.state.changed', ({ authenticated }) =>
-         setAuthenticated(authenticated))
-   }, [])
-
-   return authenticated
-}
+export const useAuthenticated = () =>
+   useSyncExternalStore(subscribe, isAuthenticated, () => false)
