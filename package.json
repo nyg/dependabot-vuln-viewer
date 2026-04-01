@@ -25,21 +25,21 @@
    },
    "dependencies": {
       "@apollo/client": "4.1.6",
-      "@babel/runtime": "7.28.6",
+      "@babel/runtime": "7.29.2",
       "github-markdown-css": "5.9.0",
-      "graphql": "16.13.1",
+      "graphql": "16.13.2",
       "marked-react": "4.0.0",
-      "next": "16.1.7",
+      "next": "16.2.1",
       "react": "19.2.4",
       "react-dom": "19.2.4",
       "rxjs": "7.8.2"
    },
    "devDependencies": {
-      "@tailwindcss/postcss": "4.2.1",
+      "@tailwindcss/postcss": "4.2.2",
       "eslint": "9.39.4",
-      "eslint-config-next": "16.1.6",
+      "eslint-config-next": "16.2.1",
       "postcss": "8.5.8",
-      "tailwindcss": "4.2.1"
+      "tailwindcss": "4.2.2"
    },
    "pnpm": {
       "overrides": {
