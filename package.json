@@ -24,22 +24,22 @@
       "lint": "eslint . --fix"
    },
    "dependencies": {
-      "@apollo/client": "4.1.6",
+      "@apollo/client": "4.1.9",
       "@babel/runtime": "7.29.2",
       "github-markdown-css": "5.9.0",
       "graphql": "16.13.2",
       "marked-react": "4.0.0",
-      "next": "16.2.3",
-      "react": "19.2.4",
-      "react-dom": "19.2.4",
+      "next": "16.2.4",
+      "react": "19.2.5",
+      "react-dom": "19.2.5",
       "rxjs": "7.8.2"
    },
    "devDependencies": {
-      "@tailwindcss/postcss": "4.2.2",
+      "@tailwindcss/postcss": "4.2.4",
       "eslint": "9.39.4",
-      "eslint-config-next": "16.2.1",
-      "postcss": "8.5.10",
-      "tailwindcss": "4.2.2"
+      "eslint-config-next": "16.2.4",
+      "postcss": "8.5.12",
+      "tailwindcss": "4.2.4"
    },
    "pnpm": {
       "overrides": {
