@@ -45,10 +45,6 @@
    "pnpm": {
       "overrides": {
          "baseline-browser-mapping": "latest"
-      },
-      "allowedBuilds": [
-         "sharp",
-         "unrs-resolver"
-      ]
+      }
    }
 }
