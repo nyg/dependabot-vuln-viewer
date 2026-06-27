@@ -14,7 +14,7 @@
       "log4shell"
    ],
    "author": "nyg",
-   "packageManager": "pnpm@11.5.0",
+   "packageManager": "pnpm@11.8.0",
    "license": "MIT",
    "bugs": {
       "url": "https://github.com/nyg/dependabot-vuln-viewer/issues"
