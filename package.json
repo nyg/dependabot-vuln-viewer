@@ -14,7 +14,7 @@
       "log4shell"
    ],
    "author": "nyg",
-   "packageManager": "pnpm@12.8.1",
+   "packageManager": "pnpm@12.16.1",
    "license": "MIT",
    "bugs": {
       "url": "https://github.com/nyg/dependabot-vuln-viewer/issues"
@@ -25,20 +25,20 @@
       "lint": "eslint . --fix"
    },
    "dependencies": {
-      "@apollo/client": "4.3.1",
+      "@apollo/client": "4.3.5",
       "github-markdown-css": "5.9.0",
       "graphql": "17.0.2",
       "marked-react": "4.0.0",
-      "next": "16.4.1",
-      "react": "19.3.0",
-      "react-dom": "19.3.0",
+      "next": "16.4.3",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
       "rxjs": "7.8.2"
    },
    "devDependencies": {
       "@tailwindcss/postcss": "4.3.3",
       "eslint": "9.39.5",
-      "eslint-config-next": "16.3.6",
-      "postcss": "8.5.28",
+      "eslint-config-next": "16.4.3",
+      "postcss": "8.5.32",
       "tailwindcss": "4.3.3"
    },
    "pnpm": {
