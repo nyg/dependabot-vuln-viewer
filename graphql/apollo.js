@@ -1,6 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { Query, Repository } from './apollo-policies'
 import { LocalState } from '@apollo/client/local-state'
+
+import { Query, Repository } from './apollo-policies'
 
 
 const client = new ApolloClient({

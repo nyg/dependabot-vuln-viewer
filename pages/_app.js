@@ -1,6 +1,8 @@
 import '../styles/global.css'
-import React, { useEffect } from 'react'
+
 import { ApolloProvider } from '@apollo/client/react'
+import React, { useEffect } from 'react'
+
 import client from '../graphql/apollo'
 import { transferOAuthToken } from '../utils/auth'
 

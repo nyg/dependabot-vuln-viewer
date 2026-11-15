@@ -1,9 +1,9 @@
-import { loadSettings, saveSettings } from '../../utils/settings'
 import { useEffect, useState } from 'react'
 
-import { useAuthenticated, useIsClient } from '../../utils/hooks'
-import eventBus from '../../utils/event-bus'
 import { getToken } from '../../utils/auth'
+import eventBus from '../../utils/event-bus'
+import { useAuthenticated, useIsClient } from '../../utils/hooks'
+import { loadSettings, saveSettings } from '../../utils/settings'
 import Input from './input'
 
 

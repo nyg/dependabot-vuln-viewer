@@ -1,6 +1,7 @@
-import eventBus from './event-bus'
-import { isAuthenticated } from './auth'
 import { useSyncExternalStore } from 'react'
+
+import { isAuthenticated } from './auth'
+import eventBus from './event-bus'
 
 const noopSubscribe = () => () => {}
 const authSubscribe = callback =>

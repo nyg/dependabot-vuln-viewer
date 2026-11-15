@@ -1,8 +1,8 @@
 import { clearToken } from '../../utils/auth'
 import eventBus from '../../utils/event-bus'
+import { useAuthenticated } from '../../utils/hooks'
 import Link from '../link'
 import MenuItem from './menu-item'
-import { useAuthenticated } from '../../utils/hooks'
 
 
 export default function Menu() {
