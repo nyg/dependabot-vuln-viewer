@@ -71,6 +71,19 @@ To enable the "Login with GitHub" option:
 If these variables are not set, the OAuth option will not appear and the app
 will work as before using only personal access tokens.
 
+### Page Views
+
+To count page views with [GoatCounter][], configure the following environment variables:
+
+```
+GOATCOUNTER_URL=https://<your-site>.goatcounter.com
+GOATCOUNTER_TOKEN=<api-token-allowed-to-record-pageviews>
+```
+
+On load the app posts the page path without its query string, the page title, the referrer and the screen size to `/api/hit`. That route adds the visitor's IP address, user agent and language, and forwards the hit to GoatCounter's API. No cookie is set, and the GitHub token is never part of it.
+
+If these variables are not set, nothing is counted.
+
 ## Install & Run
 
 ```sh
@@ -87,3 +100,4 @@ pnpm run lint  # runs eslint . --fix
 [here]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 [scope]: https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps
 [oauth-app]: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app
+[GoatCounter]: https://www.goatcounter.com
