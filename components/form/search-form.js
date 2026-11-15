@@ -47,7 +47,7 @@ export default function SearchForm() {
    useEffect(() =>
       eventBus.on('menu.item.settings.clicked', () => {
          const settings = document.getElementById('settings')
-         settings.style.display = settings.style.display == 'none' ? 'grid' : 'none'
+         settings.style.display = settings.style.display === 'none' ? 'grid' : 'none'
       }), [])
 
    const onSubmit = event => {
