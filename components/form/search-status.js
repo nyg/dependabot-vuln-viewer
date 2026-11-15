@@ -1,5 +1,6 @@
-import eventBus from '../../utils/event-bus'
 import { Fragment } from 'react'
+
+import eventBus from '../../utils/event-bus'
 import Link from '../link'
 import Tooltip from '../tooltip'
 

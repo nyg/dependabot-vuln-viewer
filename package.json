@@ -35,15 +35,11 @@
       "rxjs": "7.8.2"
    },
    "devDependencies": {
+      "@nyg/eslint-config": "github:nyg/eslint-config#v1.0.1",
       "@tailwindcss/postcss": "4.3.3",
       "eslint": "10.14.0",
       "eslint-config-next": "16.4.3",
       "postcss": "8.5.32",
       "tailwindcss": "4.3.3"
-   },
-   "pnpm": {
-      "overrides": {
-         "baseline-browser-mapping": "latest"
-      }
    }
 }

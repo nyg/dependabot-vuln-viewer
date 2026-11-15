@@ -88,4 +88,4 @@ Additional conventions:
 - `rxjs` is listed as a dependency but **not currently imported anywhere** in the source
 - `marked-react` renders vulnerability advisory descriptions as Markdown
 - `github-markdown-css` styles the rendered Markdown content
-- `package.json` uses `pnpm.overrides` to pin `baseline-browser-mapping` so `pnpm run lint` does not emit the stale-data warning from that transitive dependency
+- `pnpm-workspace.yaml` uses `overrides` to pin `baseline-browser-mapping` so `pnpm run lint` does not emit the stale-data warning from that transitive dependency
